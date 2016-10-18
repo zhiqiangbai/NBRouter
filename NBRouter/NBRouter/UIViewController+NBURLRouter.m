@@ -85,7 +85,6 @@ static void * URLparams = (void *)@"URLparams";
         }else if([config isKindOfClass:[NSDictionary class]]){ // 自定义的url情况
             NSDictionary *dict = (NSDictionary *)config;
             if([dict.allKeys containsObject:home]){
-#warning 这里需要区分创建方式
                 if ([url.scheme isEqualToString:[NBURLRouter sharedNBURLRouter].mNormalScheme]) {
                     
                     class =  NSClassFromString([dict objectForKey:home]); // 根据key拿到对应的控制器名称
