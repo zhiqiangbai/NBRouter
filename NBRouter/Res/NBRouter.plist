@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>http</key>
+	<string>FirstViewController</string>
+	<key>https</key>
+	<string>FirstViewController</string>
+	<key>bzqnormal</key>
+	<dict>
+		<key>bzqnormal://firstvc</key>
+		<string>FirstViewController</string>
+	</dict>
+	<key>bzqxib</key>
+	<dict>
+		<key>bzqxib://firstxibvc</key>
+		<string>XibViewController</string>
+	</dict>
+	<key>bzqsb</key>
+	<dict>
+		<key>bzqsb://nbrouter/Main.ForthViewController</key>
+		<string>ForthViewController</string>
+	</dict>
+</dict>
+</plist>
