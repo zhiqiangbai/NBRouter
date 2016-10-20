@@ -24,6 +24,7 @@
 
     [NBURLRouter loadConfigDictFromPlist:@"NBRouter.plist"];
     
+    [NBURLRouter setRootURLString:@"bzqsb://homepag/Main.HomeTab"];
     return YES;
 }
 

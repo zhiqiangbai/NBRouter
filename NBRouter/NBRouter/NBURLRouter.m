@@ -59,6 +59,21 @@ NBSingletonM(NBURLRouter)
         NSAssert(0, @"请按照说明添加对应的plist文件");
     }
 }
+    
++ (void)setRootURLString:(NSString *)urlString{
+    [NBURLRouter setRootURLString:urlString withNavigationClass:[NSNull class]];
+}
+    
++ (void)setRootURLString:(NSString *)urlString withNavigationClass:(Class)classType{
+    UIViewController *viewController = [UIViewController initFromString:urlString fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
+    if ([classType isSubclassOfClass:[UINavigationController class]]) {
+        UINavigationController *nav =  [[classType alloc]initWithRootViewController:viewController];
+        [NBURLNavigation setRootViewController:nav];
+    }else{
+        //说明并没有设置导航栏
+        [NBURLNavigation setRootViewController:viewController];
+    }
+}
 
 + (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     

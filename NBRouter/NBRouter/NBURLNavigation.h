@@ -20,6 +20,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readonly)UIViewController *currentViewController;
 
 NBSingletonH(NBURLNavigation)
+/**
+ *  设置根控制器
+ *
+ *  @param viewController 控制器对象
+ */
++ (void)setRootViewController:(UIViewController *)viewController;
 
 /**
  *  通过Push方式跳转,在有导航栏情况下才支持

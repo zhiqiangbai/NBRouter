@@ -51,6 +51,21 @@ NBSingletonH(NBURLRouter)
  *
  */
 + (void)loadConfigDictFromPlist:(NSString *)plistName;
+
+/**
+ *  设置RootViewController
+ *
+ *  @param urlString 自定义的URL
+ *  @param classType 需要添加的导航控制器 eg.[UINavigationController class]
+ */
++ (void)setRootURLString:(NSString *)urlString withNavigationClass:(Class)classType;
+/**
+ *  设置RootViewController
+ *
+ *  @param urlString 自定义的URL
+ */
++ (void)setRootURLString:(NSString *)urlString;
+
     
 #pragma mark --------  push控制器 --------
 /**

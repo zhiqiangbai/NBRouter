@@ -18,6 +18,8 @@
 	</dict>
 	<key>bzqsb</key>
 	<dict>
+		<key>bzqsb://homepag/Main.HomeTab</key>
+		<string>UITabbarController</string>
 		<key>bzqsb://nbrouter/Main.ForthViewController</key>
 		<string>ForthViewController</string>
 	</dict>

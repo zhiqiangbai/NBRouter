@@ -86,7 +86,6 @@ static void * URLparams = (void *)@"URLparams";
             NSDictionary *dict = (NSDictionary *)config;
             if([dict.allKeys containsObject:home]){
                 if ([url.scheme isEqualToString:[NBURLRouter sharedNBURLRouter].mNormalScheme]) {
-                    
                     class =  NSClassFromString([dict objectForKey:home]); // 根据key拿到对应的控制器名称
                     if (class == nil) { // 兼容swift,字符串转类名的时候前面加上命名空间
                         NSString *spaceName = [NSBundle mainBundle].infoDictionary[@"CFBundleExecutable"];
