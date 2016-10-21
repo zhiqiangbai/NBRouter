@@ -49,6 +49,14 @@ NBSingletonH(NBURLNavigation)
  */
 + (void)popViewControllerWithTimes:(NSUInteger)times animated:(BOOL)animated;
 /**
+ *  pop到指定控制器
+ *
+ *  @param viewController 指定控制器
+ *  @param animated       动画
+ */
++ (void)popToViewController:(UIViewController *)viewController animated:(BOOL)animated;
+
+/**
  *  导航栏跳转,回到第一个界面
  *
  */

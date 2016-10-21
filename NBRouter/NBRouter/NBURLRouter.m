@@ -148,6 +148,11 @@ NBSingletonM(NBURLRouter)
 + (void)popViewControllerWithTimes:(NSUInteger)times animated:(BOOL)animated {
     [NBURLNavigation popViewControllerWithTimes:times animated:animated];
 }
+
++ (void)popToViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    [NBURLNavigation popToViewController:viewController animated:animated];
+}
+
 + (void)popToRootViewControllerAnimated:(BOOL)animated {
     [NBURLNavigation popToRootViewControllerAnimated:animated];
 }

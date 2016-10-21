@@ -128,20 +128,34 @@ NBSingletonM(NBURLNavigation)
     [NBURLNavigation popViewControllerWithTimes:2 animated:YES];
 }
 
++ (void)popToViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    UINavigationController *currentViewController = [[NBURLNavigation sharedNBURLNavigation] currentNavigationViewController];
+    NSAssert(currentViewController, @"当前控制器不是导航栏控制器");
+    NSAssert(viewController, @"指定的ViewController不能为null");
+
+    if(currentViewController && viewController){
+        [currentViewController popToViewController:viewController animated:animated];
+    }
+}
+
 + (void)popViewControllerWithTimes:(NSUInteger)times animated:(BOOL)animated {
     
     UINavigationController *currentViewController = [[NBURLNavigation sharedNBURLNavigation] currentNavigationViewController];
 
     if(currentViewController){
-        NSUInteger count = currentViewController.viewControllers.count;
-        if (count > times){
-            [currentViewController popToViewController:[currentViewController.viewControllers objectAtIndex:count-1-times] animated:animated];
-//            if (count-times==1) {
-//                [[NBURLNavigation sharedNBURLNavigation].viewControllers removeLastObject];
-//            }
-        }else {
-            // 如果times大于控制器的数量
-            NSAssert(0, @"确定可以pop掉那么多控制器?");
+        if (times==1) {
+            [currentViewController popViewControllerAnimated:animated];
+        }else{
+            NSUInteger count = currentViewController.viewControllers.count;
+            if (count > times){
+                [currentViewController popToViewController:[currentViewController.viewControllers objectAtIndex:count-1-times] animated:animated];
+    //            if (count-times==1) {
+    //                [[NBURLNavigation sharedNBURLNavigation].viewControllers removeLastObject];
+    //            }
+            }else {
+                // 如果times大于控制器的数量
+                NSAssert(0, @"确定可以pop掉那么多控制器?");
+            }
         }
     }
 }

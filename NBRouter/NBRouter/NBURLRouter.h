@@ -93,6 +93,8 @@ NBSingletonH(NBURLRouter)
 + (void)popViewControllerWithTimes:(NSUInteger)times animated:(BOOL)animated;
 /** pop到根层控制器 */
 + (void)popToRootViewControllerAnimated:(BOOL)animated;
+/** pop到指定控制器 */
++ (void)popToViewController:(UIViewController *)viewController animated:(BOOL)animated;
     
 #pragma mark --------  modal控制器 --------
     
