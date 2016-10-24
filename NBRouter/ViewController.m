@@ -27,7 +27,7 @@
 //    
 }
 - (IBAction)onClick:(id)sender {
-    [NBURLRouter pushURLString:@"bzqnormal://firstvc?id=2332&name=uuuuu" animated:YES];
+    [NBURLRouter pushURLString:@"bzqnormal://firstvc?id=2332&name=张三" animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

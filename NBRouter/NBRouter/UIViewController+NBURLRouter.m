@@ -51,11 +51,13 @@ static void * URLparams = (void *)@"URLparams";
 }
 
 + (UIViewController *)initFromString:(NSString *)urlString fromConfig:(NSDictionary *)configDict{
-    return [UIViewController initFromURL:[NSURL URLWithString:urlString] withQuery:nil fromConfig:configDict];
+    NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    return [UIViewController initFromURL:url withQuery:nil fromConfig:configDict];
 }
 
 + (UIViewController *)initFromString:(NSString *)urlString withQuery:(NSDictionary *)query fromConfig:(NSDictionary *)configDict{
-    return [UIViewController initFromURL:[NSURL URLWithString:urlString] withQuery:query fromConfig:configDict] ;
+    NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    return [UIViewController initFromURL:url withQuery:query fromConfig:configDict] ;
 }
 
 - (void)open:(NSURL *)url withQuery:(NSDictionary *)query{
