@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readonly)NSString *mNormalScheme;        ///< 代码创建控制器协议头
 @property(nonatomic,strong,readonly)NSString *mXibScheme;           ///< xib加载控制器协议头
 @property(nonatomic,strong,readonly)NSString *mStoryBoardScheme;    ///< storyboard 加载控制器协议头
+@property(nonatomic,strong,readonly)UIViewController *currentViewController; ///< 当前控制器
 
     
 NBSingletonH(NBURLRouter)

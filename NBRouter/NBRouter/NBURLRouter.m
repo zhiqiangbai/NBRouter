@@ -18,10 +18,15 @@
 @property(nonatomic,strong,readwrite)NSString *mNormalScheme;       ///< 常规方式协议头
 @property(nonatomic,strong,readwrite)NSString *mXibScheme;          ///< xib方式协议头
 @property(nonatomic,strong,readwrite)NSString *mStoryBoardScheme;   ///< stroyboard方式协议头
+@property(nonatomic,strong,readwrite)UIViewController *currentViewController; ///< 当前控制器
 
 @end
 
 @implementation NBURLRouter
+
+- (UIViewController *)currentViewController{
+    return [NBURLNavigation sharedNBURLNavigation].currentViewController;
+}
 
 - (NSString *)mHttpScheme{
     if (!_mHttpScheme) {
