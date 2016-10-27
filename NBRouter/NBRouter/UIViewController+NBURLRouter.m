@@ -13,6 +13,7 @@
 static void * URLoriginUrl = (void *)@"URLoriginUrl";
 static void * URLpath = (void *)@"URLpath";
 static void * URLparams = (void *)@"URLparams";
+static void * URLHandler = (void *)@"URLHandler";
 
 
 
@@ -49,6 +50,17 @@ static void * URLparams = (void *)@"URLparams";
                              params,
                              OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
+
+- (void)setCallBackHandler:(CallBackHandler)handler{
+    objc_setAssociatedObject(self, URLHandler,
+                             handler,
+                             OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (CallBackHandler)callBackHandler{
+    return objc_getAssociatedObject(self, URLHandler);
+}
+
 
 + (UIViewController *)initFromString:(NSString *)urlString fromConfig:(NSDictionary *)configDict{
     NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];

@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef void(^CallBackHandler)(id parmas);
+
 /**
  *  对页面跳转设置的分类,主要设置参数,创建控制器等
  */
@@ -22,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 跳转后控制器能拿到的参数 */
 @property(nonatomic,strong) NSDictionary *params;
+
+@property(nonatomic,weak)CallBackHandler callBackHandler;
 
 // 根据参数创建控制器
 + (UIViewController *)initFromString:(NSString *)urlString fromConfig:(NSDictionary *)configDict;

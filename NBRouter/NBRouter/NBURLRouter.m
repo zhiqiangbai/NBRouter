@@ -91,9 +91,23 @@ NBSingletonM(NBURLRouter)
     [NBURLNavigation pushViewController:viewController animated:animated];
 }
 
++ (void)pushURLString:(NSString *)urlString animated:(BOOL)animated callBackHandler:(CallBackHandler)handler{
+    UIViewController *viewController = [UIViewController initFromString:urlString fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
+    viewController.callBackHandler = handler;
+    [NBURLNavigation pushViewController:viewController animated:animated];
+}
+
+
 + (void)pushURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated{
     UIViewController *viewController = [UIViewController initFromString:urlString withQuery:query fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
     [NBURLNavigation pushViewController:viewController animated:animated];
+}
+
++ (void)pushURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated callBackHandler:(CallBackHandler)handler{
+    UIViewController *viewController = [UIViewController initFromString:urlString withQuery:query fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
+    viewController.callBackHandler = handler;
+    [NBURLNavigation pushViewController:viewController animated:animated];
+
 }
 
 + (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag completion:(void (^ __nullable)(void))completion {

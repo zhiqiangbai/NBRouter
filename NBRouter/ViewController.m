@@ -27,7 +27,10 @@
 //    
 }
 - (IBAction)onClick:(id)sender {
-    [NBURLRouter pushURLString:@"bzqnormal://firstvc?id=2332&name=张三" animated:YES];
+//    [NBURLRouter pushURLString:@"bzqnormal://firstvc?id=2332&name=张三" animated:YES];
+    [NBURLRouter pushURLString:@"bzqnormal://firstvc?id=2332&name=张三" animated:YES callBackHandler:^(NSDictionary *parmas) {
+        NSLog(@"返回参数===>>> %@",parmas[@"name"]);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

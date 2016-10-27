@@ -35,6 +35,9 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [NBURLRouter popViewControllerAnimated:YES];
+    if (self.callBackHandler) {
+        self.callBackHandler(@{@"name":@"只是一个测试而已,不要紧张"});
+    }
 }
 
 /*

@@ -69,13 +69,30 @@ NBSingletonH(NBURLRouter)
 
     
 #pragma mark --------  push控制器 --------
+
+/**
+ *  push控制器
+ *
+ *  @param viewController 目的控制器
+ */
++ (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated;
+
 /**
  *  push控制器
  *
  *  @param urlString 自定义的URL,可以拼接参数
  */
 + (void)pushURLString:(NSString *)urlString animated:(BOOL)animated;
-    
+
+/**
+ *  push控制器
+ *
+ *  @param urlString 自定义的URL,可以拼接参数
+ *  @param handler   回调函数参数
+ */
++ (void)pushURLString:(NSString *)urlString animated:(BOOL)animated callBackHandler:(CallBackHandler)handler;
+
+
 /**
  *  push控制器
  *
@@ -83,6 +100,16 @@ NBSingletonH(NBURLRouter)
  *  @param query     存放参数
  */
 + (void)pushURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated;
+
+/**
+ *  push控制器
+ *
+ *  @param urlString 自定义URL,也可以拼接参数,但会被下面的query替换掉
+ *  @param query     存放参数
+ *  @param handler   回调函数参数
+ */
++ (void)pushURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated callBackHandler:(CallBackHandler)handler;
+
     
 #pragma mark --------  pop控制器 --------
     
