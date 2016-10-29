@@ -64,7 +64,7 @@
             
         case 2:
         {
-            [NBURLRouter pushURLString:@"bzqnormal://nbrouter/pushsecondviewcontrollerpushsecondviewcontroller?userName=张三&pwd=123456" animated:YES callBackHandler:^(NSDictionary *dict) {
+            [NBURLRouter pushURLString:@"bzqnormal://nbrouter/pushsecondviewcontroller?userName=张三&pwd=123456" animated:YES callBackHandler:^(NSDictionary *dict) {
                 NSLog(@"返回数据===>>>>%@ = %@",dict[@"userName"],dict[@"pwd"]);
                 weakSelf.label.text = [NSString stringWithFormat:@"返回值为:\nuserName = %@, pwd = %@",dict[@"userName"],dict[@"pwd"]];
             }];
@@ -76,7 +76,7 @@
             break;
         case 4:
             //唯一需要注意的是:xxx://xxx/xx   ,最后一个"/" 后面,必须按照规范给出 storyboardName.storyboardId, eg:Main.StoryboardViewController , 其他与上面一致
-            [NBURLRouter pushURLString:@"bzqsb://nbrouter/Main.StoryboardViewController?userName=xib跳转&pwd=1234565" animated:YES];
+            [NBURLRouter pushURLString:@"bzqsb://nbrouter/Main.StoryboardViewController?userName=xib跳转&pwd=1234565&isPush=YES" animated:YES];
             break;
         case 5:
             //http 也是类似
