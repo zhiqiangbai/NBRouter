@@ -31,13 +31,20 @@ static void * URLHandler = (void *)@"URLHandler";
     return objc_getAssociatedObject(self, URLoriginUrl);
 }
 
+- (void)setPath:(NSURL *)path{
+    objc_setAssociatedObject(self, URLpath,
+                             path,
+                             OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 - (NSString *)path {
     return objc_getAssociatedObject(self, URLpath);
 }
 
-- (void)setPath:(NSURL *)path{
-    objc_setAssociatedObject(self, URLpath,
-                             path,
+
+- (void)setParams:(NSDictionary *)params{
+    objc_setAssociatedObject(self, URLparams,
+                             params,
                              OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -45,11 +52,6 @@ static void * URLHandler = (void *)@"URLHandler";
     return objc_getAssociatedObject(self, URLparams);
 }
 
-- (void)setParams:(NSDictionary *)params{
-    objc_setAssociatedObject(self, URLparams,
-                             params,
-                             OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
 
 - (void)setCallBackHandler:(CallBackHandler)handler{
     objc_setAssociatedObject(self, URLHandler,
@@ -101,7 +103,8 @@ static void * URLHandler = (void *)@"URLHandler";
             if([dict.allKeys containsObject:home]){
                 if ([url.scheme isEqualToString:[NBURLRouter sharedNBURLRouter].mNormalScheme]) {
                     class =  NSClassFromString([dict objectForKey:home]); // 根据key拿到对应的控制器名称
-                    if (class == nil) { // 兼容swift,字符串转类名的时候前面加上命名空间
+                    if (class == nil) {
+                        // 兼容swift,字符串转类名的时候前面加上命名空间
                         NSString *spaceName = [NSBundle mainBundle].infoDictionary[@"CFBundleExecutable"];
                         class =  NSClassFromString([NSString stringWithFormat:@"%@.%@",spaceName,[dict objectForKey:home]]);
                     }
@@ -153,7 +156,13 @@ static void * URLHandler = (void *)@"URLHandler";
     return VC;
 }
 
-// 将url的参数部分转化成字典
+/**
+ *  将url的参数部分转化成字典
+ *
+ *  @param url 需要转化的url
+ *
+ *  @return 字典
+ */
 - (NSDictionary *)paramsURL:(NSURL *)url {
     
     NSMutableDictionary* pairs = [NSMutableDictionary dictionary];

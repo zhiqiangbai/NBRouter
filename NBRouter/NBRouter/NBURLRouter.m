@@ -85,6 +85,13 @@ NBSingletonM(NBURLRouter)
     [NBURLNavigation pushViewController:viewController animated:animated];
 }
 
++ (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated callBackHandler:(CallBackHandler)handler{
+    viewController.callBackHandler = handler;
+    [NBURLNavigation pushViewController:viewController animated:animated];
+
+}
+
+
 + (void)pushURLString:(NSString *)urlString animated:(BOOL)animated {
     
     UIViewController *viewController = [UIViewController initFromString:urlString fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
@@ -110,49 +117,84 @@ NBSingletonM(NBURLRouter)
 
 }
 
-+ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag completion:(void (^ __nullable)(void))completion {
-    [NBURLNavigation presentViewController:viewControllerToPresent animated:flag completion:completion];
++ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)animated completion:(void (^ __nullable)(void))completion {
+    [NBURLRouter presentViewController:viewControllerToPresent animated:animated completion:completion callBackHandler:nil];
 }
 
-+ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion {
++ (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)animated completion:(void (^)(void))completion callBackHandler:(CallBackHandler)handler{
+    if (handler) {
+        viewControllerToPresent.callBackHandler = handler;
+    }
+    [NBURLNavigation presentViewController:viewControllerToPresent animated:animated completion:completion];
+}
+
++ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion {
     
+    [NBURLRouter presentViewController:viewControllerToPresent animated:animated withNavigationClass:classType completion:completion callBackHandler:nil];
+}
+
++ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler{
+    if (handler) {
+        viewControllerToPresent.callBackHandler = handler;
+    }
     if ([classType isSubclassOfClass:[UINavigationController class]]) {
         UINavigationController *nav =  [[classType alloc]initWithRootViewController:viewControllerToPresent];
-        [NBURLNavigation presentViewController:nav animated:flag completion:completion];
+        [NBURLNavigation presentViewController:nav animated:animated completion:completion];
     }
 }
 
+
 + (void)presentURLString:(NSString *)urlString animated:(BOOL)animated completion:(void (^ __nullable)(void))completion{
-    UIViewController *viewController = [UIViewController initFromString:urlString fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
-    [NBURLNavigation presentViewController:viewController animated:animated completion:completion];
+    [NBURLRouter presentURLString:urlString animated:animated completion:completion callBackHandler:nil];
 }
 
-
-+ (void)presentURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated completion:(void (^ __nullable)(void))completion{
-    UIViewController *viewController = [UIViewController initFromString:urlString withQuery:query fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
-    [NBURLNavigation presentViewController:viewController animated:animated completion:completion];
-}
-
-
-+ (void)pushURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated replace:(BOOL)replace{
-    UIViewController *viewController = [UIViewController initFromString:urlString withQuery:query fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
-    [NBURLNavigation pushViewController:viewController animated:animated];
-}
-
-
-+ (void)presentURLString:(NSString *)urlString animated:(BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion{
++ (void)presentURLString:(NSString *)urlString animated:(BOOL)animated completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler{
     
     UIViewController *viewController = [UIViewController initFromString:urlString fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
+    if (handler) {
+        viewController.callBackHandler = handler;
+    }
+    [NBURLNavigation presentViewController:viewController animated:animated completion:completion];
+}
+
++ (void)presentURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated completion:(void (^ __nullable)(void))completion{
+    [NBURLRouter presentURLString:urlString query:query animated:animated completion:completion callBackHandler:nil];
+}
+
++ (void)presentURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler{
+    UIViewController *viewController = [UIViewController initFromString:urlString withQuery:query fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
+    if (handler) {
+        viewController.callBackHandler = handler;
+    }
+    [NBURLNavigation presentViewController:viewController animated:animated completion:completion];
+
+}
+
++ (void)presentURLString:(NSString *)urlString animated:(BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion{
+    [NBURLRouter presentURLString:urlString animated:animated withNavigationClass:classType completion:completion callBackHandler:nil];
+}
+
++ (void)presentURLString:(NSString *)urlString animated:(BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler{
+    UIViewController *viewController = [UIViewController initFromString:urlString fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
+    if (handler) {
+        viewController.callBackHandler = handler;
+    }
     if ([classType isSubclassOfClass:[UINavigationController class]]) {
         UINavigationController *nav =  [[classType alloc]initWithRootViewController:viewController];
         [NBURLNavigation presentViewController:nav animated:animated completion:completion];
     }
 }
 
-+ (void)presentURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated withNavigationClass:(Class)clazz completion:(void (^ __nullable)(void))completion{
++ (void)presentURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion{
+    [NBURLRouter presentURLString:urlString query:query animated:animated withNavigationClass:classType completion:completion callBackHandler:nil];
+}
++ (void)presentURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler{
     UIViewController *viewController = [UIViewController initFromString:urlString withQuery:query fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
-    if ([clazz isSubclassOfClass:[UINavigationController class]]) {
-        UINavigationController *nav =  [[clazz alloc]initWithRootViewController:viewController];
+    if (handler) {
+        viewController.callBackHandler = handler;
+    }
+    if ([classType isSubclassOfClass:[UINavigationController class]]) {
+        UINavigationController *nav =  [[classType alloc]initWithRootViewController:viewController];
         [NBURLNavigation presentViewController:nav animated:animated completion:completion];
     }
 }
@@ -177,19 +219,19 @@ NBSingletonM(NBURLRouter)
 }
 
 
-+ (void)dismissViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion {
-    [NBURLNavigation dismissViewControllerWithTimes:1 animated:flag completion:completion];
++ (void)dismissViewControllerAnimated: (BOOL)animated completion: (void (^ __nullable)(void))completion {
+    [NBURLNavigation dismissViewControllerWithTimes:1 animated:animated completion:completion];
 }
-+ (void)dismissTwiceViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion {
-    [NBURLNavigation dismissTwiceViewControllerAnimated:flag completion:completion];
-}
-
-+ (void)dismissViewControllerWithTimes:(NSUInteger)times animated: (BOOL)flag completion: (void (^ __nullable)(void))completion {
-    [NBURLNavigation dismissViewControllerWithTimes:times animated:flag completion:completion];
++ (void)dismissTwiceViewControllerAnimated: (BOOL)animated completion: (void (^ __nullable)(void))completion {
+    [NBURLNavigation dismissTwiceViewControllerAnimated:animated completion:completion];
 }
 
-+ (void)dismissToRootViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion {
-    [NBURLNavigation dismissToRootViewControllerAnimated:flag completion:completion];
++ (void)dismissViewControllerWithTimes:(NSUInteger)times animated: (BOOL)animated completion: (void (^ __nullable)(void))completion {
+    [NBURLNavigation dismissViewControllerWithTimes:times animated:animated completion:completion];
+}
+
++ (void)dismissToRootViewControllerAnimated: (BOOL)animated completion: (void (^ __nullable)(void))completion {
+    [NBURLNavigation dismissToRootViewControllerAnimated:animated completion:completion];
 }
 
 

@@ -1,5 +1,5 @@
 //
-//  ThirdViewController.h
+//  StoryboardViewController.h
 //  NBRouter
 //
 //  Created by NapoleonBai on 16/10/18.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ThirdViewController : UIViewController
+@interface StoryboardViewController : UIViewController
 
 @end

@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  PushSecondViewController.h
 //  NBRouter
 //
 //  Created by NapoleonBai on 16/10/16.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface PushSecondViewController : UIViewController
 
 
 @end

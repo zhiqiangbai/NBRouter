@@ -1,5 +1,5 @@
 //
-//  SecondViewController.h
+//  ModalHomeViewController.h
 //  NBRouter
 //
 //  Created by NapoleonBai on 16/10/18.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UIViewController
+@interface ModalHomeViewController : UITableViewController
 
 @end

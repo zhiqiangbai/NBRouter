@@ -1,23 +1,32 @@
 //
-//  ThirdViewController.m
+//  StoryboardViewController.m
 //  NBRouter
 //
 //  Created by NapoleonBai on 16/10/18.
 //  Copyright © 2016年 BaiZhiqiang. All rights reserved.
 //
 
-#import "ThirdViewController.h"
+#import "StoryboardViewController.h"
 #import "NBRouterHeader.h"
 
-@interface ThirdViewController ()
+@interface StoryboardViewController ()
+
+@property(assign,nonatomic)BOOL isPush;
+@property (weak, nonatomic) IBOutlet UILabel *label;
 
 @end
 
-@implementation ThirdViewController
+@implementation StoryboardViewController
+
+- (BOOL)isPush{
+    return [self.params[@"isPush"] boolValue];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.label.text = [NSString stringWithFormat:@"点击屏幕,回到上一页\n\n 传递参数为:\nuserName = %@, pwd = %@",self.params[@"userName"],self.params[@"pwd"]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -26,9 +35,11 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [NBURLRouter presentURLString:@"bzqsb://nbrouter/Main.ForthViewController?userName=zhangsan&age=56" animated:YES completion:^{
-        NSLog(@"跳转comple ==>>");
-    }];
+    if (self.isPush) {
+        [NBURLRouter popViewControllerAnimated:YES];
+    }else{
+        [NBURLRouter dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 /*

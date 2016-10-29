@@ -34,7 +34,7 @@ NBSingletonH(NBURLRouter)
 + (void)setSchemeFromXibLoadViewController:(NSString *)scheme;
 /**
  *  如果有从storyboard中加载控制器的跳转,就需要设置, 
- *  此类url按照此种格式设计, eg:fromsb://xxxxx/storyboardFileName.viewControllerIdentifier,主要是提供storyboardName 以及 控制器的 identifier
+ *  此类url按照此种规范书写, eg:fromsb://xxxxx/storyboardName.storyboardId,主要是提供storyboardName 以及 控制器的 storyboardId
  */
 + (void)setSchemeFromStoryboardLoadViewController:(NSString *)scheme;
 /**
@@ -76,6 +76,14 @@ NBSingletonH(NBURLRouter)
  *  @param viewController 目的控制器
  */
 + (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated;
+
+/**
+ *  push控制器
+ *
+ *  @param viewController   目的控制器
+ *  @param handler          回调函数参数
+ */
++ (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated callBackHandler:(CallBackHandler)handler;
 
 /**
  *  push控制器
@@ -131,22 +139,50 @@ NBSingletonH(NBURLRouter)
  *
  *  @param viewControllerToPresent 目标控制器
  */
-+ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag completion:(void (^ __nullable)(void))completion;
-    
++ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)animated completion:(void (^ __nullable)(void))completion;
+
+/**
+ *  modal控制器
+ *
+ *  @param viewControllerToPresent 目标控制器
+ *  @param handler                 回调函数参数
+ */
++ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)animated completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler;
+
 /**
  *  modal控制器
  *
  *  @param viewControllerToPresent 目标控制器
  *  @param classType               需要添加的导航控制器 eg.[UINavigationController class]
  */
-+ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion;
-    
++ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion;
+
+/**
+ *  modal控制器
+ *
+ *  @param viewControllerToPresent 目标控制器
+ *  @param classType               需要添加的导航控制器 eg.[UINavigationController class]
+ *  @param handler                 回调函数参数
+ */
++ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler;
+
+
+
 /**
  *  modal控制器
  *
  *  @param urlString 自定义的URL,可以拼接参数
  */
 + (void)presentURLString:(NSString *)urlString animated:(BOOL)animated completion:(void (^ __nullable)(void))completion;
+
+/**
+ *  modal控制器
+ *
+ *  @param urlString 自定义的URL,可以拼接参数
+ *  @param handler   回调函数参数
+ */
++ (void)presentURLString:(NSString *)urlString animated:(BOOL)animated completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler;
+
     
 /**
  *  modal控制器
@@ -155,33 +191,65 @@ NBSingletonH(NBURLRouter)
  *  @param query     存放参数
  */
 + (void)presentURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated completion:(void (^ __nullable)(void))completion;
-    
+
+
+/**
+ *  modal控制器
+ *
+ *  @param urlString 自定义URL,也可以拼接参数,但会被下面的query替换掉
+ *  @param query     存放参数
+ *  @param handler   回调函数参数
+ */
++ (void)presentURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler;
+
+
 /**
  *  modal控制器,并且给modal出来的控制器添加一个导航控制器
  *
  *  @param urlString 自定义的URL,可以拼接参数
- *  @param classType     需要添加的导航控制器 eg.[UINavigationController class]
+ *  @param classType 需要添加的导航控制器 eg.[UINavigationController class]
  */
 + (void)presentURLString:(NSString *)urlString animated:(BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion;
+
+
+/**
+ *  modal控制器,并且给modal出来的控制器添加一个导航控制器
+ *
+ *  @param urlString 自定义的URL,可以拼接参数
+ *  @param classType 需要添加的导航控制器 eg.[UINavigationController class]
+ *  @param handler   回调函数参数
+ */
++ (void)presentURLString:(NSString *)urlString animated:(BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler;
+
     
 /**
  *  modal控制器,并且给modal出来的控制器添加一个导航控制器
  *
  *  @param urlString 自定义URL,也可以拼接参数,但会被下面的query替换掉
  *  @param query     存放参数
- *  @param clazz     需要添加的导航控制器 eg.[UINavigationController class]
+ *  @param classType 需要添加的导航控制器 eg.[UINavigationController class]
  */
-+ (void)presentURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated withNavigationClass:(Class)clazz completion:(void (^ __nullable)(void))completion;
-    
++ (void)presentURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion;
+
+/**
+ *  modal控制器,并且给modal出来的控制器添加一个导航控制器
+ *
+ *  @param urlString 自定义URL,也可以拼接参数,但会被下面的query替换掉
+ *  @param query     存放参数
+ *  @param classType 需要添加的导航控制器 eg.[UINavigationController class]
+ *  @param handler   回调函数参数
+ */
++ (void)presentURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler;
+
 #pragma mark --------  dismiss控制器 --------
     /** dismiss掉1层控制器 */
-+ (void)dismissViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion;
++ (void)dismissViewControllerAnimated: (BOOL)animated completion: (void (^ __nullable)(void))completion;
     /** dismiss掉2层控制器 */
-+ (void)dismissTwiceViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion;
++ (void)dismissTwiceViewControllerAnimated: (BOOL)animated completion: (void (^ __nullable)(void))completion;
     /** dismiss掉times层控制器 */
-+ (void)dismissViewControllerWithTimes:(NSUInteger)times animated: (BOOL)flag completion: (void (^ __nullable)(void))completion;
++ (void)dismissViewControllerWithTimes:(NSUInteger)times animated: (BOOL)animated completion: (void (^ __nullable)(void))completion;
     /** dismiss到根层控制器 */
-+ (void)dismissToRootViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion;
++ (void)dismissToRootViewControllerAnimated: (BOOL)animated completion: (void (^ __nullable)(void))completion;
     
     NS_ASSUME_NONNULL_END
 

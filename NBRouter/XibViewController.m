@@ -15,53 +15,37 @@
 @interface XibViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *desLabel;
 
+@property(assign,nonatomic)BOOL isPush;
+
 @end
 
 @implementation XibViewController
 
+- (BOOL)isPush{
+    return [self.params[@"isPush"] boolValue];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    //如果需要监听系统自带返回按钮,自行设置即可
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    self.desLabel.text = self.params[@"name"];
+    
+    self.desLabel.text = [NSString stringWithFormat:@"点击屏幕,回到上一页\n\n 传递参数为:\nuserName = %@, pwd = %@",self.params[@"userName"],self.params[@"pwd"]];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self getProperties:[self class]];
-    [NBURLRouter popViewControllerAnimated:YES];
-}
-
-//返回当前类的所有属性
-- (instancetype)getProperties:(Class)cls{
-    
-    // 获取当前类的所有属性
-    unsigned int count;// 记录属性个数
-    objc_property_t *properties = class_copyPropertyList(cls, &count);
-    // 遍历
-    NSMutableArray *mArray = [NSMutableArray array];
-    for (int i = 0; i < count; i++) {
-        
-        // An opaque type that represents an Objective-C declared property.
-        // objc_property_t 属性类型
-        objc_property_t property = properties[i];
-        // 获取属性的名称 C语言字符串
-        const char *cName = property_getName(property);
-        // 转换为Objective C 字符串
-        NSString *name = [NSString stringWithCString:cName encoding:NSUTF8StringEncoding];
-        [mArray addObject:name];
-        
-        NSLog(@"===>>>>>>>>>%@",name);
+    if (self.isPush) {
+        [NBURLRouter popViewControllerAnimated:YES];
+    }else{
+        [NBURLRouter dismissViewControllerAnimated:YES completion:nil];
     }
-    
-    return mArray.copy;
 }
 
 

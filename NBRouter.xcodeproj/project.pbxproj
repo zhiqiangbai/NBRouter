@@ -7,24 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		440057351DB65FA900A1857A /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440057341DB65FA900A1857A /* ThirdViewController.m */; };
-		440057381DB65FCE00A1857A /* ForthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440057371DB65FCE00A1857A /* ForthViewController.m */; };
+		440057351DB65FA900A1857A /* StoryboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440057341DB65FA900A1857A /* StoryboardViewController.m */; };
+		440057381DB65FCE00A1857A /* ModalChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440057371DB65FCE00A1857A /* ModalChildViewController.m */; };
+		440F1A411DC488D8006E2799 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440F1A3F1DC488D8006E2799 /* Main.storyboard */; };
+		440F1A441DC49111006E2799 /* NBWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440F1A431DC49111006E2799 /* NBWebViewController.m */; };
 		446639E01DB60E0A00161C88 /* XibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446639DE1DB60E0A00161C88 /* XibViewController.m */; };
-		446639E41DB610D400161C88 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446639E31DB610D400161C88 /* SecondViewController.m */; };
+		446639E41DB610D400161C88 /* ModalHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446639E31DB610D400161C88 /* ModalHomeViewController.m */; };
 		446639E61DB614C000161C88 /* XibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446639E51DB614C000161C88 /* XibViewController.xib */; };
 		44C6CCCB1DB5D4A8009EA8FB /* NBURLNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C6CCCA1DB5D4A8009EA8FB /* NBURLNavigation.m */; };
 		44C6CCCE1DB5D4DE009EA8FB /* UIViewController+NBURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C6CCCD1DB5D4DE009EA8FB /* UIViewController+NBURLRouter.m */; };
 		44E6684C1DB3AA6300E9222C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6684B1DB3AA6300E9222C /* main.m */; };
 		44E6684F1DB3AA6300E9222C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6684E1DB3AA6300E9222C /* AppDelegate.m */; };
-		44E668521DB3AA6300E9222C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E668511DB3AA6300E9222C /* ViewController.m */; };
-		44E668551DB3AA6300E9222C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44E668531DB3AA6300E9222C /* Main.storyboard */; };
+		44E668521DB3AA6300E9222C /* PushSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E668511DB3AA6300E9222C /* PushSecondViewController.m */; };
 		44E668571DB3AA6300E9222C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44E668561DB3AA6300E9222C /* Assets.xcassets */; };
 		44E6685A1DB3AA6300E9222C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44E668581DB3AA6300E9222C /* LaunchScreen.storyboard */; };
 		44E668651DB3AA6300E9222C /* NBRouterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E668641DB3AA6300E9222C /* NBRouterTests.m */; };
 		44E668701DB3AA6300E9222C /* NBRouterUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6686F1DB3AA6300E9222C /* NBRouterUITests.m */; };
 		44E668821DB3AC5400E9222C /* NBURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E668811DB3AC5400E9222C /* NBURLRouter.m */; };
 		44E79E5B1DB6021A0035BF5D /* NBRouter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44E79E5A1DB6021A0035BF5D /* NBRouter.plist */; };
-		44E79E5E1DB602C10035BF5D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E79E5D1DB602C10035BF5D /* FirstViewController.m */; };
+		44E79E5E1DB602C10035BF5D /* PushHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E79E5D1DB602C10035BF5D /* PushHomeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,15 +46,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		440057331DB65FA900A1857A /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
-		440057341DB65FA900A1857A /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
-		440057361DB65FCE00A1857A /* ForthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForthViewController.h; sourceTree = "<group>"; };
-		440057371DB65FCE00A1857A /* ForthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForthViewController.m; sourceTree = "<group>"; };
+		440057331DB65FA900A1857A /* StoryboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryboardViewController.h; sourceTree = "<group>"; };
+		440057341DB65FA900A1857A /* StoryboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryboardViewController.m; sourceTree = "<group>"; };
+		440057361DB65FCE00A1857A /* ModalChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalChildViewController.h; sourceTree = "<group>"; };
+		440057371DB65FCE00A1857A /* ModalChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalChildViewController.m; sourceTree = "<group>"; };
+		440F1A401DC488D8006E2799 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		440F1A421DC49111006E2799 /* NBWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBWebViewController.h; sourceTree = "<group>"; };
+		440F1A431DC49111006E2799 /* NBWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBWebViewController.m; sourceTree = "<group>"; };
 		4453E2841DB5FFC400D25CAB /* NBRouterHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NBRouterHeader.h; path = NBRouter/NBRouterHeader.h; sourceTree = "<group>"; };
 		446639DD1DB60E0A00161C88 /* XibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XibViewController.h; sourceTree = "<group>"; };
 		446639DE1DB60E0A00161C88 /* XibViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XibViewController.m; sourceTree = "<group>"; };
-		446639E21DB610D400161C88 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		446639E31DB610D400161C88 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		446639E21DB610D400161C88 /* ModalHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalHomeViewController.h; sourceTree = "<group>"; };
+		446639E31DB610D400161C88 /* ModalHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalHomeViewController.m; sourceTree = "<group>"; };
 		446639E51DB614C000161C88 /* XibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XibViewController.xib; sourceTree = "<group>"; };
 		44C6CCC91DB5D4A8009EA8FB /* NBURLNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBURLNavigation.h; path = NBRouter/NBURLNavigation.h; sourceTree = "<group>"; };
 		44C6CCCA1DB5D4A8009EA8FB /* NBURLNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBURLNavigation.m; path = NBRouter/NBURLNavigation.m; sourceTree = "<group>"; };
@@ -63,9 +67,8 @@
 		44E6684B1DB3AA6300E9222C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		44E6684D1DB3AA6300E9222C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		44E6684E1DB3AA6300E9222C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		44E668501DB3AA6300E9222C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		44E668511DB3AA6300E9222C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		44E668541DB3AA6300E9222C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		44E668501DB3AA6300E9222C /* PushSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushSecondViewController.h; sourceTree = "<group>"; };
+		44E668511DB3AA6300E9222C /* PushSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushSecondViewController.m; sourceTree = "<group>"; };
 		44E668561DB3AA6300E9222C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44E668591DB3AA6300E9222C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		44E6685B1DB3AA6300E9222C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,8 +82,8 @@
 		44E668801DB3AC5400E9222C /* NBURLRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBURLRouter.h; path = NBRouter/NBURLRouter.h; sourceTree = "<group>"; };
 		44E668811DB3AC5400E9222C /* NBURLRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBURLRouter.m; path = NBRouter/NBURLRouter.m; sourceTree = "<group>"; };
 		44E79E5A1DB6021A0035BF5D /* NBRouter.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = NBRouter.plist; path = Res/NBRouter.plist; sourceTree = "<group>"; };
-		44E79E5C1DB602C10035BF5D /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		44E79E5D1DB602C10035BF5D /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		44E79E5C1DB602C10035BF5D /* PushHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushHomeViewController.h; sourceTree = "<group>"; };
+		44E79E5D1DB602C10035BF5D /* PushHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushHomeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,20 +139,22 @@
 				446639DD1DB60E0A00161C88 /* XibViewController.h */,
 				446639DE1DB60E0A00161C88 /* XibViewController.m */,
 				446639E51DB614C000161C88 /* XibViewController.xib */,
+				440F1A421DC49111006E2799 /* NBWebViewController.h */,
+				440F1A431DC49111006E2799 /* NBWebViewController.m */,
 				44E6684D1DB3AA6300E9222C /* AppDelegate.h */,
 				44E6684E1DB3AA6300E9222C /* AppDelegate.m */,
-				44E668501DB3AA6300E9222C /* ViewController.h */,
-				44E668511DB3AA6300E9222C /* ViewController.m */,
-				44E79E5C1DB602C10035BF5D /* FirstViewController.h */,
-				44E79E5D1DB602C10035BF5D /* FirstViewController.m */,
-				446639E21DB610D400161C88 /* SecondViewController.h */,
-				446639E31DB610D400161C88 /* SecondViewController.m */,
-				440057331DB65FA900A1857A /* ThirdViewController.h */,
-				440057341DB65FA900A1857A /* ThirdViewController.m */,
-				440057361DB65FCE00A1857A /* ForthViewController.h */,
-				440057371DB65FCE00A1857A /* ForthViewController.m */,
-				44E668531DB3AA6300E9222C /* Main.storyboard */,
+				44E668501DB3AA6300E9222C /* PushSecondViewController.h */,
+				44E668511DB3AA6300E9222C /* PushSecondViewController.m */,
+				44E79E5C1DB602C10035BF5D /* PushHomeViewController.h */,
+				44E79E5D1DB602C10035BF5D /* PushHomeViewController.m */,
+				446639E21DB610D400161C88 /* ModalHomeViewController.h */,
+				446639E31DB610D400161C88 /* ModalHomeViewController.m */,
+				440057361DB65FCE00A1857A /* ModalChildViewController.h */,
+				440057371DB65FCE00A1857A /* ModalChildViewController.m */,
+				440057331DB65FA900A1857A /* StoryboardViewController.h */,
+				440057341DB65FA900A1857A /* StoryboardViewController.m */,
 				44E668561DB3AA6300E9222C /* Assets.xcassets */,
+				440F1A3F1DC488D8006E2799 /* Main.storyboard */,
 				44E668581DB3AA6300E9222C /* LaunchScreen.storyboard */,
 				44E6685B1DB3AA6300E9222C /* Info.plist */,
 				44E6684A1DB3AA6300E9222C /* Supporting Files */,
@@ -314,10 +319,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				446639E61DB614C000161C88 /* XibViewController.xib in Resources */,
+				440F1A411DC488D8006E2799 /* Main.storyboard in Resources */,
 				44E6685A1DB3AA6300E9222C /* LaunchScreen.storyboard in Resources */,
 				44E79E5B1DB6021A0035BF5D /* NBRouter.plist in Resources */,
 				44E668571DB3AA6300E9222C /* Assets.xcassets in Resources */,
-				44E668551DB3AA6300E9222C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,16 +347,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				446639E41DB610D400161C88 /* SecondViewController.m in Sources */,
+				446639E41DB610D400161C88 /* ModalHomeViewController.m in Sources */,
 				44C6CCCE1DB5D4DE009EA8FB /* UIViewController+NBURLRouter.m in Sources */,
-				440057381DB65FCE00A1857A /* ForthViewController.m in Sources */,
+				440057381DB65FCE00A1857A /* ModalChildViewController.m in Sources */,
 				44E668821DB3AC5400E9222C /* NBURLRouter.m in Sources */,
-				44E668521DB3AA6300E9222C /* ViewController.m in Sources */,
+				44E668521DB3AA6300E9222C /* PushSecondViewController.m in Sources */,
+				440F1A441DC49111006E2799 /* NBWebViewController.m in Sources */,
 				44E6684F1DB3AA6300E9222C /* AppDelegate.m in Sources */,
-				440057351DB65FA900A1857A /* ThirdViewController.m in Sources */,
+				440057351DB65FA900A1857A /* StoryboardViewController.m in Sources */,
 				44E6684C1DB3AA6300E9222C /* main.m in Sources */,
 				44C6CCCB1DB5D4A8009EA8FB /* NBURLNavigation.m in Sources */,
-				44E79E5E1DB602C10035BF5D /* FirstViewController.m in Sources */,
+				44E79E5E1DB602C10035BF5D /* PushHomeViewController.m in Sources */,
 				446639E01DB60E0A00161C88 /* XibViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,10 +394,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		44E668531DB3AA6300E9222C /* Main.storyboard */ = {
+		440F1A3F1DC488D8006E2799 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				44E668541DB3AA6300E9222C /* Base */,
+				440F1A401DC488D8006E2799 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
