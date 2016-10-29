@@ -14,6 +14,9 @@
   * 从storyboard中加载需要在字符串中指定 `storyboardName.storyboardId`,这样感觉不是很好(感觉问题)
   * 还无法区分http:// & https:// 是加载网页还是加载本地控制器 (目前把所有http & https 链接当网页处理)
   * 其他
+  
+##图片介绍
+![NBRouter](https://github.com/NapoleonBaiAndroid/NBRouter/blob/master/NBRouter/Res/nbrouter.gif "样例图片")
    
 ##怎样使用?
 1. 设置相关配置
