@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "NBRouter"
-  s.version      = "1.2.0"
+  s.version      = "1.2.1"
   s.summary      = "提供控制器切换管理,支持链式调用"
 
 
@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
   s.author       = { "NapoleonBai" => "napoleonbaiandroid@gmail.com" }
 
 
-  s.source       = { :git => "https://github.com/NapoleonBaiAndroid/NBRouter.git", :tag => "1.2.0" }
+  s.source       = { :git => "https://github.com/NapoleonBaiAndroid/NBRouter.git", :tag => "1.2.1" }
 
   s.platform = :ios
 
@@ -38,5 +38,7 @@ Pod::Spec.new do |s|
   s.public_header_files = "NBRouter/NBRouter/*.h"
 
   s.framework = 'UIKit'
+
+  s.requires_arc = true
 
 end
