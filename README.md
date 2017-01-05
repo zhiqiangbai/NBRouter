@@ -1,17 +1,19 @@
 # NBRouter 
 ###这是一个通过字符串进行控制器之间的跳转,彻底解脱只有在控制器中才能跳转,有了这个,你可以在任何地方进行控制器的跳转
-    支持从纯代码,xib,storyboard中创建的控制器
+    支持从纯代码,xib,storyboard中创建的控制器,1.2.0开始支持链式语法调用
 ###结构
   >NBRouter 项目m文件夹
   * NBSingleton 一个单例宏
   * NBURLRouter 公开的接口类,主要就使用这个类进行开发
   * NBURLNavigation 内部导航管理类,进行跳转等实际操作
   * UIViewController+NBURLRouter 参数信息,以及控制器的提取等
-  * NBRouterHeader 使用时导入这个头文件即可
-  
+  * NBRouter 使用时导入这个头文件即可
+  * NBURLRouteMaker 使用这个配置相关的设置属性,比如url,动画,回调等参数
+  
 
 ##尚待改善(不影响使用,只是对完善的探索)
-  * 从storyboard中加载需要在字符串中指定 `storyboardName.storyboardId`,这样感觉不是很好(感觉问题)
+  * ~~从storyboard中加载需要在字符串中指定 `storyboardName.storyboardId`,这样感觉不是很好(感觉问题)~~
+  * 1.2.0版本新增 IntentToMaker & IntentTo 方法,以及NBURLRouteMaker类来配置相关设置,解决了这个问题,如果还使用其他的push/present方法,当然还      需要这样设置
   * 还无法区分http:// & https:// 是加载网页还是加载本地控制器 (目前把所有http & https 链接当网页处理)
   * 其他
   
@@ -21,6 +23,50 @@
 ##怎样使用?
 1. 设置相关配置
 2. 正常化的push,modal操作
+3. _新增链式语法操作_
+
+##1.2.0版本新操作
+<NBURLRouter类>
+新增
+``` Objective-c
+/**
+ 传入maker对象,进行跳转到指定控制器,
+ 使用这个方法,是不需要设置多个加载控制器的协议头,直接在maker中设置即可,
+ 当前可直接使用:maker.*.*.push()进行跳转切换,后期再改进
+
+ @param maker 配置
+ */
++ (void)IntentToMaker:(NBURLRouteMaker *)maker;
+
+/**
+ 在block中设置maker,
+ 使用这个方法,是不需要设置多个加载控制器的协议头,直接在maker中设置即可
+
+ @param block 回调,设置maker配置参数
+ */
++ (void)IntentTo:(void(^)(NBURLRouteMaker *))block;
+
+```
+
+<NBURLRouteMaker类>,负责对目标控制器的设置等操作,其结合NBURLRouter类使用:
+``` Objective-c
+//链式语法使用,这里的push()操作是隐式调用了 IntentToMaker函数,当然,如果不是用push(),自己调用也行;
+maker.intentUrlStr(@"bzqnormal://nbrouter/pushsecondviewcontroller?userName=张三&pwd=123456").hidesBottomBarWhenPushed(YES).animate(YES).handler(^(NSDictionary *dict) {
+                NSLog(@"返回数据===>>>>%@ = %@",dict[@"userName"],dict[@"pwd"]);
+                weakSelf.label.text = [NSString stringWithFormat:@"返回值为:\nuserName = %@, pwd = %@",dict[@"userName"],dict[@"pwd"]];
+}).push();
+
+
+//采用IntentTo函数
+[NBURLRouter IntentTo:^(NBURLRouteMaker * maker) {
+                maker.intentUrlStr(@"bzqnormal://nbrouter/modalchildviewcontroller?userName=张三&pwd=123456").hidesBottomBarWhenPushed(YES).animate(YES).handler(^(NSDictionary *dict) {
+                    NSLog(@"返回数据===>>>>%@ = %@",dict[@"userName"],dict[@"pwd"]);
+                    weakSelf.label.text = [NSString stringWithFormat:@"返回值为:\nuserName = %@, pwd = %@",dict[@"userName"],dict[@"pwd"]];
+                });
+}];
+
+
+```
 
 ##API简介<NBURLRouter类>
   PUSH API
@@ -317,7 +363,7 @@
   //当然,你可以自己定制一个Model来负责数据传递,如果只有一个参数,肯定就没有这么麻烦了,且行且珍惜吧
 ```
 ##当然,这个是支持COCOAPODS的
-    pod 'NBRouter', '~> 1.1.1' #版本自己控制哈,这里目前更新到这个版本而已了
+    pod 'NBRouter' #版本号自己控制
 
 
 
