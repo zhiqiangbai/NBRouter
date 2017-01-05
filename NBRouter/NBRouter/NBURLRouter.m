@@ -8,7 +8,7 @@
 
 #import "NBURLRouter.h"
 #import "NBURLNavigation.h"
-
+#import "NBURLRouteMaker.h"
 
 @interface NBURLRouter()
 
@@ -43,6 +43,13 @@
 }
 
 NBSingletonM(NBURLRouter)
+
+- (instancetype)init{
+    if (self = [super init]) {
+        self.hideBottomBarWhenPushed = YES;
+    }
+    return self;
+}
 
 + (void)setSchemeFromCodeViewController:(NSString *)scheme{
     [NBURLRouter sharedNBURLRouter].mNormalScheme = scheme;
@@ -81,40 +88,43 @@ NBSingletonM(NBURLRouter)
 }
 
 + (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    
+    viewController.hidesBottomBarWhenPushed = [NBURLRouter sharedNBURLRouter].hideBottomBarWhenPushed;
     [NBURLNavigation pushViewController:viewController animated:animated];
 }
 
 + (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated callBackHandler:(CallBackHandler)handler{
     viewController.callBackHandler = handler;
+    viewController.hidesBottomBarWhenPushed = [NBURLRouter sharedNBURLRouter].hideBottomBarWhenPushed;
     [NBURLNavigation pushViewController:viewController animated:animated];
-
 }
 
 
 + (void)pushURLString:(NSString *)urlString animated:(BOOL)animated {
     
     UIViewController *viewController = [UIViewController initFromString:urlString fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
+    viewController.hidesBottomBarWhenPushed = [NBURLRouter sharedNBURLRouter].hideBottomBarWhenPushed;
     [NBURLNavigation pushViewController:viewController animated:animated];
 }
 
 + (void)pushURLString:(NSString *)urlString animated:(BOOL)animated callBackHandler:(CallBackHandler)handler{
     UIViewController *viewController = [UIViewController initFromString:urlString fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
     viewController.callBackHandler = handler;
+    viewController.hidesBottomBarWhenPushed = [NBURLRouter sharedNBURLRouter].hideBottomBarWhenPushed;
     [NBURLNavigation pushViewController:viewController animated:animated];
 }
 
 
 + (void)pushURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated{
     UIViewController *viewController = [UIViewController initFromString:urlString withQuery:query fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
+    viewController.hidesBottomBarWhenPushed = [NBURLRouter sharedNBURLRouter].hideBottomBarWhenPushed;
     [NBURLNavigation pushViewController:viewController animated:animated];
 }
 
 + (void)pushURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated callBackHandler:(CallBackHandler)handler{
     UIViewController *viewController = [UIViewController initFromString:urlString withQuery:query fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
+    viewController.hidesBottomBarWhenPushed = [NBURLRouter sharedNBURLRouter].hideBottomBarWhenPushed;
     viewController.callBackHandler = handler;
     [NBURLNavigation pushViewController:viewController animated:animated];
-
 }
 
 + (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)animated completion:(void (^ __nullable)(void))completion {
@@ -234,6 +244,39 @@ NBSingletonM(NBURLRouter)
     [NBURLNavigation dismissToRootViewControllerAnimated:animated completion:completion];
 }
 
++ (void)IntentToMaker:(NBURLRouteMaker *)maker{
+    UIViewController *viewController = maker.m_viewController;
+    if (!viewController) {
+        viewController = [UIViewController initFromMaker:maker fromConfig:[NBURLRouter sharedNBURLRouter].configDict];
+    }
+    if (viewController) {
+        //是否隐藏底部工具栏
+        viewController.hidesBottomBarWhenPushed = maker.m_hideBottomBarWhenPush;
+        viewController.callBackHandler = maker.m_handler;
+        if ([maker.m_navigationClass isSubclassOfClass:[UINavigationController class]]) {
+            UINavigationController *nav =  [[maker.m_navigationClass alloc]initWithRootViewController:viewController];
+            if (maker.m_intentType == IntentTypePresent) {
+                [NBURLNavigation presentViewController:nav animated:maker.m_animate completion:maker.m_completion];
+            }else{
+                NSAssert(0, @"抱歉,导航栏跳转不支持自定义设置导航栏");
+            }
+        }else{
+            //直接忽视,不设置导航栏控制器
+            if (maker.m_intentType == IntentTypePush) {
+                [NBURLNavigation pushViewController:viewController animated:maker.m_animate];
+            }else{
+                [NBURLNavigation presentViewController:viewController animated:maker.m_animate completion:maker.m_completion];
+            }
+        }
+    }else{
+        NSAssert(0, @"请正确设置目标控制器");
+    }
+}
 
++ (void)IntentTo:(void (^)(NBURLRouteMaker * _Nonnull))block{
+    NBURLRouteMaker *maker = [NBURLRouteMaker new];
+    block(maker);
+    [NBURLRouter IntentToMaker:maker];
+}
 
 @end

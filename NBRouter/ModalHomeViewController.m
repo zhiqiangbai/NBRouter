@@ -45,6 +45,7 @@
  */
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NBURLRouteMaker *maker = [NBURLRouteMaker new];
     //MODAL 跳转方式,从code ,从xib , 从 storyboard 中加载都是一样的,区别不同就是要定义好自己的协议即可,按照规范书写就好了
     self.label.text = @"显示返回数据";
     __weak typeof(self) weakSelf = self;
@@ -68,6 +69,29 @@
         case 3:
             //UINavigationController 是系统的导航栏控制器,如果自己定义,也是可以的,只要继承自UINavigationController就可
             [NBURLRouter presentURLString:@"bzqnormal://nbrouter/modalchildviewcontroller?userName=张三&pwd=123456" animated:YES withNavigationClass:[UINavigationController class] completion:nil];
+            break;
+        case 4:
+            maker.intentUrlStr(@"bzqnormal://nbrouter/modalchildviewcontroller?userName=张三&pwd=123456").animate(YES).present();
+            break;
+        case 5:
+            maker.intentUrlStr(@"bzqnormal://nbrouter/modalchildviewcontroller").animate(YES).parmas(@{@"userName":@"张三",
+                                                                                                       @"pwd":@"123456"}).completion(^(){
+                NSLog(@"回调===>>>>");
+            }).present();
+            break;
+            
+        case 6:
+        {
+            maker.intentUrlStr(@"bzqnormal://nbrouter/modalchildviewcontroller?userName=张三&pwd=123456").hidesBottomBarWhenPushed(YES).animate(YES).handler(^(NSDictionary *dict) {
+                NSLog(@"返回数据===>>>>%@ = %@",dict[@"userName"],dict[@"pwd"]);
+                weakSelf.label.text = [NSString stringWithFormat:@"返回值为:\nuserName = %@, pwd = %@",dict[@"userName"],dict[@"pwd"]];
+            }).present();
+        }
+            break;
+        case 7:
+            //使用导航栏
+            maker.intentUrlStr(@"bzqnormal://nbrouter/modalchildviewcontroller?userName=张三&pwd=123456").navigationClass([UINavigationController class]).present();
+            
             break;
     }
 }

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class NBURLRouteMaker;
 
 NS_ASSUME_NONNULL_BEGIN
 /**
@@ -30,6 +31,6 @@ typedef void(^ __nullable CallBackHandler)(id parmas);
 // 根据参数创建控制器
 + (UIViewController *)initFromString:(NSString *)urlString withQuery:(NSDictionary *)query fromConfig:(NSDictionary *)configDict;
 
-
++ (UIViewController *)initFromMaker:(NBURLRouteMaker *)maker fromConfig:(NSDictionary *)configDict;
 @end
 NS_ASSUME_NONNULL_END

@@ -7,7 +7,7 @@
 //
 
 #import "ModalChildViewController.h"
-#import "NBRouterHeader.h"
+#import "NBRouter.h"
 
 @interface ModalChildViewController ()
 

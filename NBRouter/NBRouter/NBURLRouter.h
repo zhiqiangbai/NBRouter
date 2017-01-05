@@ -9,6 +9,8 @@
 #import "NBSingleton.h"
 #import "UIViewController+NBURLRouter.h"
 
+@class NBURLRouteMaker;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -24,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readonly)NSString *mXibScheme;           ///< xib加载控制器协议头
 @property(nonatomic,strong,readonly)NSString *mStoryBoardScheme;    ///< storyboard 加载控制器协议头
 @property(nonatomic,strong,readonly)UIViewController *currentViewController; ///< 当前控制器
-
+@property(nonatomic,assign)BOOL hideBottomBarWhenPushed;///< 导航栏跳转时,是否隐藏菜单栏
     
 NBSingletonH(NBURLRouter)
 
@@ -250,7 +252,25 @@ NBSingletonH(NBURLRouter)
 + (void)dismissViewControllerWithTimes:(NSUInteger)times animated: (BOOL)animated completion: (void (^ __nullable)(void))completion;
     /** dismiss到根层控制器 */
 + (void)dismissToRootViewControllerAnimated: (BOOL)animated completion: (void (^ __nullable)(void))completion;
-    
-    NS_ASSUME_NONNULL_END
+
+
+/**
+ 传入maker对象,进行跳转到指定控制器,
+ 使用这个方法,是不需要设置多个加载控制器的协议头,直接在maker中设置即可,
+ 当前可直接使用:maker.*.*.push()进行跳转切换,后期再改进
+
+ @param maker 配置
+ */
++ (void)IntentToMaker:(NBURLRouteMaker *)maker;
+
+/**
+ 在block中设置maker,
+ 使用这个方法,是不需要设置多个加载控制器的协议头,直接在maker中设置即可
+
+ @param block 回调,设置maker配置参数
+ */
++ (void)IntentTo:(void(^)(NBURLRouteMaker *))block;
+
+NS_ASSUME_NONNULL_END
 
 @end

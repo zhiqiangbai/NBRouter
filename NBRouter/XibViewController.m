@@ -8,7 +8,7 @@
 
 #import "XibViewController.h"
 
-#import "NBRouterHeader.h"
+#import "NBRouter.h"
 
 #import "objc/runtime.h"
 

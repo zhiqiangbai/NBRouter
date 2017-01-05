@@ -8,7 +8,7 @@
 
 #import "NBWebViewController.h"
 
-#import "NBRouterHeader.h"
+#import "NBRouter.h"
 #import <WebKit/WebKit.h>
 
 @interface NBWebViewController ()
