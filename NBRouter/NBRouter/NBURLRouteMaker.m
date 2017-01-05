@@ -57,7 +57,7 @@
 - (LoadStoryboardName)storyboardName{
     if (!_storyboardName) {
         __weak typeof(self) weakSelf = self;
-        return ^(NSString *storyboardName) {
+        _storyboardName = ^(NSString *storyboardName) {
             weakSelf.m_storyboard = storyboardName;
             weakSelf.m_loadViewControllerType = LoadViewControllerTypeStoryboard;
             return weakSelf;
@@ -68,8 +68,8 @@
 
 - (LoadXibName)xibName{
     if (!_xibName) {
-        __weak typeof(self) weakSelf = self;
-        return ^(NSString *xibName) {
+         __weak typeof(self) weakSelf = self;
+        _xibName = ^(NSString *xibName) {
             weakSelf.m_xib = xibName;
             weakSelf.m_loadViewControllerType = LoadViewControllerTypeXib;
             return weakSelf;
@@ -81,7 +81,7 @@
 - (LoadIdentifier)identifier{
     if (!_identifier) {
         __weak typeof(self) weakSelf = self;
-        return ^(NSString *identifier) {
+        _identifier = ^(NSString *identifier) {
             weakSelf.m_identifier = identifier;
             return weakSelf;
         };
@@ -92,7 +92,7 @@
 - (FromBundle)bundle{
     if (!_bundle) {
         __weak typeof (self) weakSelf = self;
-        return ^(NSBundle * bundle) {
+        _bundle = ^(NSBundle * bundle) {
             weakSelf.m_bundle = bundle;
             return weakSelf;
         };
@@ -103,7 +103,7 @@
 - (HidesBottomBarWhenPushed)hidesBottomBarWhenPushed{
     if (!_hidesBottomBarWhenPushed) {
         __weak typeof(self) weakSelf = self;
-        return ^(BOOL hide) {
+        _hidesBottomBarWhenPushed =  ^(BOOL hide) {
             weakSelf.m_hideBottomBarWhenPush = hide;
             return weakSelf;
         };
@@ -114,7 +114,7 @@
 - (IntentUrl)intentUrlStr{
     if (!_intentUrlStr) {
         __weak typeof(self) weakSelf = self;
-        return ^(NSString *urlStr) {
+        _intentUrlStr =  ^(NSString *urlStr) {
             weakSelf.m_urlStr = urlStr;
             return weakSelf;
         };
@@ -125,7 +125,7 @@
 - (Animate)animate{
     if (!_animate) {
         __weak typeof(self) weakSelf = self;
-        return ^(BOOL animate) {
+        _animate = ^(BOOL animate) {
             weakSelf.m_animate = animate;
             return weakSelf;
         };
@@ -136,7 +136,7 @@
 - (Parmas)parmas{
     if (!_parmas) {
         __weak typeof(self) weakSelf = self;
-        return ^(NSDictionary *parmas) {
+        _parmas =  ^(NSDictionary *parmas) {
             weakSelf.m_parmas = parmas;
             return weakSelf;
         };
@@ -147,7 +147,7 @@
 - (Handler)handler{
     if (!_handler) {
         __weak typeof(self) weakSelf = self;
-        return ^(BackHandler handler) {
+        _handler =  ^(BackHandler handler) {
             weakSelf.m_handler = handler;
             return weakSelf;
         };
@@ -158,7 +158,7 @@
 - (CompletionHandler)completion{
     if (!_completion) {
         __weak typeof(self) weakSelf = self;
-        return ^(Completion completion) {
+        _completion =  ^(Completion completion) {
             weakSelf.m_completion = completion;
             return weakSelf;
         };
@@ -169,7 +169,7 @@
 - (NavigationClass)navigationClass{
     if (!_navigationClass) {
         __weak typeof(self) weakSelf = self;
-        return ^(Class class){
+        _navigationClass =  ^(Class class){
             weakSelf.m_navigationClass = class;
             return weakSelf;
         };
@@ -179,7 +179,7 @@
 - (IntentViewController)viewController{
     if (!_viewController) {
         __weak typeof(self) weakSelf = self;
-        return ^(UIViewController *viewController){
+        _viewController = ^(UIViewController *viewController){
             weakSelf.m_viewController = viewController;
             return weakSelf;
         };
@@ -190,7 +190,7 @@
 - (Push)push{
     if (!_push) {
         __weak typeof(self) weakSelf = self;
-        return ^(){
+        _push = ^(){
             weakSelf.m_intentType = IntentTypePush;
             [weakSelf intent];
         };
@@ -201,7 +201,7 @@
 - (Present)present{
     if (!_present) {
         __weak typeof(self) weakSelf = self;
-        return ^(){
+        _present = ^(){
             weakSelf.m_intentType = IntentTypePresent;
             [weakSelf intent];
         };
