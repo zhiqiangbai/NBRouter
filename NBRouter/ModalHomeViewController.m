@@ -8,6 +8,7 @@
 
 #import "ModalHomeViewController.h"
 #import "NBURLRouter.h"
+#import "NBURLRouteMaker.h"
 
 @interface ModalHomeViewController ()
 
@@ -82,10 +83,12 @@
             
         case 6:
         {
-            maker.intentUrlStr(@"bzqnormal://nbrouter/modalchildviewcontroller?userName=张三&pwd=123456").hidesBottomBarWhenPushed(YES).animate(YES).handler(^(NSDictionary *dict) {
-                NSLog(@"返回数据===>>>>%@ = %@",dict[@"userName"],dict[@"pwd"]);
-                weakSelf.label.text = [NSString stringWithFormat:@"返回值为:\nuserName = %@, pwd = %@",dict[@"userName"],dict[@"pwd"]];
-            }).present();
+            [NBURLRouter IntentTo:^(NBURLRouteMaker * maker) {
+                maker.intentUrlStr(@"bzqnormal://nbrouter/modalchildviewcontroller?userName=张三&pwd=123456").hidesBottomBarWhenPushed(YES).animate(YES).handler(^(NSDictionary *dict) {
+                    NSLog(@"返回数据===>>>>%@ = %@",dict[@"userName"],dict[@"pwd"]);
+                    self.label.text = [NSString stringWithFormat:@"返回值为:\nuserName = %@, pwd = %@",dict[@"userName"],dict[@"pwd"]];
+                });
+            }];
         }
             break;
         case 7:
