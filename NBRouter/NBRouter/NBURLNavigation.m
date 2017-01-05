@@ -10,7 +10,6 @@
 
 @interface NBURLNavigation()
 
-//@property(nonatomic,strong)NSMutableArray<UIViewController *>* viewControllers;
 @property(nonatomic,strong)UINavigationController *currentNavigationViewController;
 @property(nonatomic,strong,readwrite)UIViewController *currentViewController;
 
@@ -18,14 +17,6 @@
 @end
 
 @implementation NBURLNavigation
-
-//- (NSMutableArray<UIViewController *> *)viewControllers{
-//    if (!_viewControllers) {
-//        _viewControllers = [NSMutableArray new];
-//        [self.viewControllers addObject:[[self applicationDelegate] window].rootViewController];
-//    }
-//    return _viewControllers;
-//}
 
 NBSingletonM(NBURLNavigation)
 
@@ -54,16 +45,8 @@ NBSingletonM(NBURLNavigation)
     if (!viewController) {
         NSAssert(0, @"请添加与url相匹配的控制器到plist文件中,或者协议头可能写错了!");
     }else {
-//        NBURLNavigation *navigation = [NBURLNavigation sharedNBURLNavigation];
         UINavigationController *navigationController = [NBURLNavigation sharedNBURLNavigation].currentNavigationViewController;
         if (navigationController) {
-//            if ([navigation.viewControllers containsObject:navigationController]) {
-//                //如果之前存在,就移除
-//                [navigation.viewControllers removeObject:navigationController];
-//            }
-//            //重新加载在末尾
-//            [navigation.viewControllers addObject:navigationController];
-//            viewController.hidesBottomBarWhenPushed = YES;
             [navigationController pushViewController:viewController animated:animated];
         }else{
             NSAssert(0, @"当前控制器非导航栏控制器,无法进行push操作");
@@ -80,7 +63,6 @@ NBSingletonM(NBURLNavigation)
         if (currentViewController) {
             // 当前控制器存在
             [currentViewController presentViewController:viewController animated:flag completion:completion];
-//            [[NBURLNavigation sharedNBURLNavigation].viewControllers addObject:viewController];
         } else {
             NSAssert(0, @"没有找到根控制器,无法进行modal跳转操作");
         }
@@ -97,12 +79,6 @@ NBSingletonM(NBURLNavigation)
         [navigation.applicationDelegate.window makeKeyAndVisible];
     }
     navigation.applicationDelegate.window.rootViewController = viewController;
-//    //如果是重新设置,那么就先清空之前的
-//    if (navigation.viewControllers.count) {
-//        [navigation.viewControllers removeAllObjects];
-//    }
-//    //重新添加控制器
-//    [navigation.viewControllers addObject:viewController];
 }
 
 
@@ -149,9 +125,6 @@ NBSingletonM(NBURLNavigation)
             NSUInteger count = currentViewController.viewControllers.count;
             if (count > times){
                 [currentViewController popToViewController:[currentViewController.viewControllers objectAtIndex:count-1-times] animated:animated];
-    //            if (count-times==1) {
-    //                [[NBURLNavigation sharedNBURLNavigation].viewControllers removeLastObject];
-    //            }
             }else {
                 // 如果times大于控制器的数量
                 NSAssert(0, @"确定可以pop掉那么多控制器?");
@@ -161,7 +134,6 @@ NBSingletonM(NBURLNavigation)
 }
 + (void)popToRootViewControllerAnimated:(BOOL)animated {
     [[NBURLNavigation sharedNBURLNavigation].currentNavigationViewController popToRootViewControllerAnimated:animated];
-//    [[NBURLNavigation sharedNBURLNavigation].viewControllers removeLastObject];
 }
 
 
@@ -179,8 +151,6 @@ NBSingletonM(NBURLNavigation)
             times -= 1;
         }
         [rootVC dismissViewControllerAnimated:YES completion:completion];
-        //dismiss 一个则删除一个
-//        [[NBURLNavigation sharedNBURLNavigation].viewControllers removeLastObject];
     }
     
     if (!rootVC.presentedViewController) {
@@ -196,7 +166,6 @@ NBSingletonM(NBURLNavigation)
     while (rootVC.presentingViewController) {
         rootVC = rootVC.presentingViewController;
         [rootVC dismissViewControllerAnimated:YES completion:completion];
-//        [[NBURLNavigation sharedNBURLNavigation].viewControllers removeLastObject];
     }
 }
 

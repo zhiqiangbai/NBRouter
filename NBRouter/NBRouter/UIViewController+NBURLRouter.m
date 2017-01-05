@@ -8,7 +8,9 @@
 
 #import "UIViewController+NBURLRouter.h"
 #import "NBURLRouter.h"
+#import "NBURLRouteMaker.h"
 #import <objc/runtime.h>
+
 
 static void * URLoriginUrl = (void *)@"URLoriginUrl";
 static void * URLpath = (void *)@"URLpath";
@@ -74,10 +76,78 @@ static void * URLHandler = (void *)@"URLHandler";
     return [UIViewController initFromURL:url withQuery:query fromConfig:configDict] ;
 }
 
++ (UIViewController *)initFromMaker:(NBURLRouteMaker *)maker fromConfig:(NSDictionary *)configDict{
+    NSURL *url = [NSURL URLWithString:[maker.m_urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    UIViewController *VC = nil;
+    NSString *home;
+    if(url.path == nil){ // 处理url,去掉有可能会拼接的参数
+        home = [NSString stringWithFormat:@"%@://%@", url.scheme, url.host];
+    }else{
+        home = [NSString stringWithFormat:@"%@://%@%@", url.scheme, url.host,url.path];
+    }
+    if([configDict.allKeys containsObject:url.scheme]){ // 字典中的所有的key是否包含传入的协议头
+        id config = [configDict objectForKey:url.scheme]; // 根据协议头取出值
+        Class class = nil;
+        if([config isKindOfClass:[NSString class]]){ //当协议头是http https的情况
+            class =  NSClassFromString(config);
+        }else if([config isKindOfClass:[NSDictionary class]]){ // 自定义的url情况
+            NSDictionary *dict = (NSDictionary *)config;
+            if([dict.allKeys containsObject:home]){
+                
+                switch (maker.m_loadViewControllerType) {
+                    case LoadViewControllerTypeCode:
+                    {
+                        class =  NSClassFromString([dict objectForKey:home]); // 根据key拿到对应的控制器名称
+                        if (class == nil) {
+                            // 兼容swift,字符串转类名的时候前面加上命名空间
+                            NSString *spaceName = [NSBundle mainBundle].infoDictionary[@"CFBundleExecutable"];
+                            class =  NSClassFromString([NSString stringWithFormat:@"%@.%@",spaceName,[dict objectForKey:home]]);
+                        }
+                    }
+                        break;
+                        case LoadViewControllerTypeXib:
+                            VC = [maker.m_bundle loadNibNamed:[dict objectForKey:home] owner:self options:NULL].lastObject;
+                        break;
+                    case LoadViewControllerTypeStoryboard:
+                    {
+                            //获取storyboard: 通过bundle根据storyboard的名字来获取我们的storyboard,
+                            UIStoryboard *story = [UIStoryboard storyboardWithName:maker.m_storyboard bundle:maker.m_bundle];
+                            //由storyboard根据myView的storyBoardID来获取我们要切换的视图
+                            VC = [story instantiateViewControllerWithIdentifier:maker.m_identifier];
+                    }
+                        break;
+                }
+                
+                if (VC && [VC respondsToSelector:@selector(open:withQuery:)]){
+                    [VC open:url withQuery:maker.m_parmas];
+                    return VC;
+                }
+            }
+        }
+        
+        if(class !=nil){
+            VC = [[class alloc]init];
+            if([VC respondsToSelector:@selector(open:withQuery:)]){
+                [VC open:url withQuery:maker.m_parmas];
+            }
+        }
+        
+        // 处理网络地址的情况
+        if ([url.scheme isEqualToString:[NBURLRouter sharedNBURLRouter].mHttpScheme] || [url.scheme isEqualToString:[NBURLRouter sharedNBURLRouter].mHttpsScheme]) {
+            class =  NSClassFromString([configDict objectForKey:url.scheme]);
+            VC.params = @{@"urlStr": [url absoluteString]};
+        }
+    }
+    return VC;
+}
+
+
 - (void)open:(NSURL *)url withQuery:(NSDictionary *)query{
     self.path = [url path];
     self.originUrl = url;
-    if (query) {   // 如果自定义url后面有拼接参数,而且又通过query传入了参数,那么优先query传入了参数
+    if (query) {
+        // 如果自定义url后面有拼接参数,而且又通过query传入了参数,那么优先query传入了参数
         self.params = query;
     }else {
         self.params = [self paramsURL:url];

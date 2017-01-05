@@ -11,6 +11,7 @@
 		440057381DB65FCE00A1857A /* ModalChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440057371DB65FCE00A1857A /* ModalChildViewController.m */; };
 		440F1A411DC488D8006E2799 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440F1A3F1DC488D8006E2799 /* Main.storyboard */; };
 		440F1A441DC49111006E2799 /* NBWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440F1A431DC49111006E2799 /* NBWebViewController.m */; };
+		445569451E1DE7D90041B2CB /* NBURLRouteMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 445569441E1DE7D90041B2CB /* NBURLRouteMaker.m */; };
 		446639E01DB60E0A00161C88 /* XibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446639DE1DB60E0A00161C88 /* XibViewController.m */; };
 		446639E41DB610D400161C88 /* ModalHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446639E31DB610D400161C88 /* ModalHomeViewController.m */; };
 		446639E61DB614C000161C88 /* XibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446639E51DB614C000161C88 /* XibViewController.xib */; };
@@ -53,7 +54,9 @@
 		440F1A401DC488D8006E2799 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		440F1A421DC49111006E2799 /* NBWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBWebViewController.h; sourceTree = "<group>"; };
 		440F1A431DC49111006E2799 /* NBWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBWebViewController.m; sourceTree = "<group>"; };
-		4453E2841DB5FFC400D25CAB /* NBRouterHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NBRouterHeader.h; path = NBRouter/NBRouterHeader.h; sourceTree = "<group>"; };
+		4453E2841DB5FFC400D25CAB /* NBRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NBRouter.h; path = NBRouter/NBRouter.h; sourceTree = "<group>"; };
+		445569431E1DE7D90041B2CB /* NBURLRouteMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBURLRouteMaker.h; path = NBRouter/NBURLRouteMaker.h; sourceTree = "<group>"; };
+		445569441E1DE7D90041B2CB /* NBURLRouteMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBURLRouteMaker.m; path = NBRouter/NBURLRouteMaker.m; sourceTree = "<group>"; };
 		446639DD1DB60E0A00161C88 /* XibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XibViewController.h; sourceTree = "<group>"; };
 		446639DE1DB60E0A00161C88 /* XibViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XibViewController.m; sourceTree = "<group>"; };
 		446639E21DB610D400161C88 /* ModalHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalHomeViewController.h; sourceTree = "<group>"; };
@@ -191,6 +194,7 @@
 		44E6687D1DB3AA7200E9222C /* NBRouter */ = {
 			isa = PBXGroup;
 			children = (
+				4453E2841DB5FFC400D25CAB /* NBRouter.h */,
 				44E6687F1DB3AB6300E9222C /* NBSingleton.h */,
 				44E668801DB3AC5400E9222C /* NBURLRouter.h */,
 				44E668811DB3AC5400E9222C /* NBURLRouter.m */,
@@ -198,7 +202,8 @@
 				44C6CCCA1DB5D4A8009EA8FB /* NBURLNavigation.m */,
 				44C6CCCC1DB5D4DE009EA8FB /* UIViewController+NBURLRouter.h */,
 				44C6CCCD1DB5D4DE009EA8FB /* UIViewController+NBURLRouter.m */,
-				4453E2841DB5FFC400D25CAB /* NBRouterHeader.h */,
+				445569431E1DE7D90041B2CB /* NBURLRouteMaker.h */,
+				445569441E1DE7D90041B2CB /* NBURLRouteMaker.m */,
 			);
 			name = NBRouter;
 			sourceTree = "<group>";
@@ -349,6 +354,7 @@
 			files = (
 				446639E41DB610D400161C88 /* ModalHomeViewController.m in Sources */,
 				44C6CCCE1DB5D4DE009EA8FB /* UIViewController+NBURLRouter.m in Sources */,
+				445569451E1DE7D90041B2CB /* NBURLRouteMaker.m in Sources */,
 				440057381DB65FCE00A1857A /* ModalChildViewController.m in Sources */,
 				44E668821DB3AC5400E9222C /* NBURLRouter.m in Sources */,
 				44E668521DB3AA6300E9222C /* PushSecondViewController.m in Sources */,

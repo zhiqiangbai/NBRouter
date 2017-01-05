@@ -7,7 +7,7 @@
 //
 
 #import "StoryboardViewController.h"
-#import "NBRouterHeader.h"
+#import "NBRouter.h"
 
 @interface StoryboardViewController ()
 
