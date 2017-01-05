@@ -49,6 +49,7 @@
 ```
 
 <NBURLRouteMaker类>,负责对目标控制器的设置等操作,其结合NBURLRouter类使用:
+
 ``` Objective-c
 //链式语法使用,这里的push()操作是隐式调用了 IntentToMaker函数,当然,如果不是用push(),自己调用也行;
 maker.intentUrlStr(@"bzqnormal://nbrouter/pushsecondviewcontroller?userName=张三&pwd=123456").hidesBottomBarWhenPushed(YES).animate(YES).handler(^(NSDictionary *dict) {
@@ -61,7 +62,7 @@ maker.intentUrlStr(@"bzqnormal://nbrouter/pushsecondviewcontroller?userName=张�
 [NBURLRouter IntentTo:^(NBURLRouteMaker * maker) {
                 maker.intentUrlStr(@"bzqnormal://nbrouter/modalchildviewcontroller?userName=张三&pwd=123456").hidesBottomBarWhenPushed(YES).animate(YES).handler(^(NSDictionary *dict) {
                     NSLog(@"返回数据===>>>>%@ = %@",dict[@"userName"],dict[@"pwd"]);
-                    weakSelf.label.text = [NSString stringWithFormat:@"返回值为:\nuserName = %@, pwd = %@",dict[@"userName"],dict[@"pwd"]];
+                    self.label.text = [NSString stringWithFormat:@"返回值为:\nuserName = %@, pwd = %@",dict[@"userName"],dict[@"pwd"]];
                 });
 }];
 
