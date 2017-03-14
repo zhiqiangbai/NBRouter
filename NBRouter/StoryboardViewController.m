@@ -36,9 +36,9 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     if (self.isPush) {
-        [NBURLRouter popViewControllerAnimated:YES];
+        [NBURLRouter pop];
     }else{
-        [NBURLRouter dismissViewControllerAnimated:YES completion:nil];
+        [NBURLRouter dismiss];
     }
 }
 

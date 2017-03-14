@@ -6,8 +6,8 @@
 //  Copyright © 2016年 BaiZhiqiang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "NBViewController.h"
 
-@interface ModalChildViewController : UIViewController
+@interface ModalChildViewController : NBViewController
 
 @end

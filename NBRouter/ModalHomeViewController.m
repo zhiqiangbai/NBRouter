@@ -7,8 +7,7 @@
 //
 
 #import "ModalHomeViewController.h"
-#import "NBURLRouter.h"
-#import "NBURLRouteMaker.h"
+#import "NBRouter.h"
 
 @interface ModalHomeViewController ()
 
@@ -46,55 +45,49 @@
  */
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NBURLRouteMaker *maker = [NBURLRouteMaker new];
-    //MODAL 跳转方式,从code ,从xib , 从 storyboard 中加载都是一样的,区别不同就是要定义好自己的协议即可,按照规范书写就好了
     self.label.text = @"显示返回数据";
-    __weak typeof(self) weakSelf = self;
     switch (indexPath.row) {
         case 0:
-            [NBURLRouter presentURLString:@"bzqnormal://nbrouter/modalchildviewcontroller?userName=张三&pwd=123456" animated:YES completion:nil];
+            // 普通的代码创建控制器跳转  <从 xib / storyboard 中加载都与push类似>
+            [NBURLRouter present:^(NBURLRouteMaker * _Nonnull maker) {
+                maker.intentUrlStr(@"nbrouter://modalchild?userName=张三&pwd=123456&index=1").navigationClass([UINavigationController class]).animate(YES);
+            }];
             break;
         case 1:
-            
-            [NBURLRouter presentURLString:@"bzqnormal://nbrouter/modalchildviewcontroller" query:@{@"userName":@"张三",@"pwd":@"123456"} animated:YES completion:nil];
+            // 字典传递参数
+            [NBURLRouter present:^(NBURLRouteMaker * _Nonnull maker) {
+                maker.intentUrlStr(@"nbrouter://modalchild").navigationClass([UINavigationController class]).parmas(@{@"userName":@"张三",
+                                                                                    @"pwd":@"123456",
+                                                                                    @"index":@1}).animate(YES);;
+            }];
             break;
             
         case 2:
         {
-            [NBURLRouter presentURLString:@"bzqnormal://nbrouter/modalchildviewcontroller?userName=张三&pwd=123456" animated:YES completion:nil callBackHandler:^(NSDictionary *dict) {
-                NSLog(@"返回数据===>>>>%@ = %@",dict[@"userName"],dict[@"pwd"]);
-                weakSelf.label.text = [NSString stringWithFormat:@"返回值为:\nuserName = %@, pwd = %@",dict[@"userName"],dict[@"pwd"]];
-            }];
-        }
-            break;
-        case 3:
-            //UINavigationController 是系统的导航栏控制器,如果自己定义,也是可以的,只要继承自UINavigationController就可
-            [NBURLRouter presentURLString:@"bzqnormal://nbrouter/modalchildviewcontroller?userName=张三&pwd=123456" animated:YES withNavigationClass:[UINavigationController class] completion:nil];
-            break;
-        case 4:
-            maker.intentUrlStr(@"bzqnormal://nbrouter/modalchildviewcontroller?userName=张三&pwd=123456").animate(YES).present();
-            break;
-        case 5:
-            maker.intentUrlStr(@"bzqnormal://nbrouter/modalchildviewcontroller").animate(YES).parmas(@{@"userName":@"张三",
-                                                                                                       @"pwd":@"123456"}).completion(^(){
-                NSLog(@"回调===>>>>");
-            }).present();
-            break;
-            
-        case 6:
-        {
-            [NBURLRouter IntentTo:^(NBURLRouteMaker * maker) {
-                maker.intentUrlStr(@"bzqnormal://nbrouter/modalchildviewcontroller?userName=张三&pwd=123456").hidesBottomBarWhenPushed(YES).animate(YES).handler(^(NSDictionary *dict) {
+            // 接收返回值
+            [NBURLRouter present:^(NBURLRouteMaker * _Nonnull maker) {
+                maker.intentUrlStr(@"nbrouter://modalchild").navigationClass([UINavigationController class]).parmas(@{@"userName":@"张三",
+                                                                                    @"pwd":@"123456",
+                                                                                    @"index":@1}).animate(YES).handler(^(NSDictionary *dict) {
                     NSLog(@"返回数据===>>>>%@ = %@",dict[@"userName"],dict[@"pwd"]);
                     self.label.text = [NSString stringWithFormat:@"返回值为:\nuserName = %@, pwd = %@",dict[@"userName"],dict[@"pwd"]];
                 });
             }];
         }
             break;
-        case 7:
-            //使用导航栏
-            maker.intentUrlStr(@"bzqnormal://nbrouter/modalchildviewcontroller?userName=张三&pwd=123456").navigationClass([UINavigationController class]).present();
-            
+        case 3:
+            //UINavigationController 是系统的导航栏控制器,如果自己定义,也是可以的,只要继承自UINavigationController就可
+            [NBURLRouter present:^(NBURLRouteMaker * _Nonnull maker) {
+                maker.intentUrlStr(@"nbrouter://modalchild").navigationClass([UINavigationController class]).parmas(@{@"userName":@"张三",
+                                                                                                                                    @"pwd":@"123456",
+                                                                                                                                    @"index":@1}).animate(YES);;
+            }];
+            break;
+        case 4:
+            // 网页链接跳转
+            [NBURLRouter present:^(NBURLRouteMaker * _Nonnull maker) {
+                maker.intentUrlStr(@"http://www.baidu.com");
+            }];
             break;
     }
 }

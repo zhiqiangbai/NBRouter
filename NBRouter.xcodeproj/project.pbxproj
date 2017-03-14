@@ -11,12 +11,15 @@
 		440057381DB65FCE00A1857A /* ModalChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440057371DB65FCE00A1857A /* ModalChildViewController.m */; };
 		440F1A411DC488D8006E2799 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440F1A3F1DC488D8006E2799 /* Main.storyboard */; };
 		440F1A441DC49111006E2799 /* NBWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440F1A431DC49111006E2799 /* NBWebViewController.m */; };
+		444CB5511E777D630041A6F2 /* NBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 444CB5501E777D630041A6F2 /* NBViewController.m */; };
+		444CB5551E77D2D50041A6F2 /* AppDelegate+NBRouterUrlsConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 444CB5541E77D2D50041A6F2 /* AppDelegate+NBRouterUrlsConfig.m */; };
 		445569451E1DE7D90041B2CB /* NBURLRouteMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 445569441E1DE7D90041B2CB /* NBURLRouteMaker.m */; };
 		446639E01DB60E0A00161C88 /* XibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446639DE1DB60E0A00161C88 /* XibViewController.m */; };
 		446639E41DB610D400161C88 /* ModalHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446639E31DB610D400161C88 /* ModalHomeViewController.m */; };
 		446639E61DB614C000161C88 /* XibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446639E51DB614C000161C88 /* XibViewController.xib */; };
 		44C6CCCB1DB5D4A8009EA8FB /* NBURLNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C6CCCA1DB5D4A8009EA8FB /* NBURLNavigation.m */; };
 		44C6CCCE1DB5D4DE009EA8FB /* UIViewController+NBURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C6CCCD1DB5D4DE009EA8FB /* UIViewController+NBURLRouter.m */; };
+		44DC11561E70FF9800A03C6D /* NBURLRouteBacker.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DC11551E70FF9800A03C6D /* NBURLRouteBacker.m */; };
 		44E6684C1DB3AA6300E9222C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6684B1DB3AA6300E9222C /* main.m */; };
 		44E6684F1DB3AA6300E9222C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E6684E1DB3AA6300E9222C /* AppDelegate.m */; };
 		44E668521DB3AA6300E9222C /* PushSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E668511DB3AA6300E9222C /* PushSecondViewController.m */; };
@@ -54,6 +57,10 @@
 		440F1A401DC488D8006E2799 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		440F1A421DC49111006E2799 /* NBWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBWebViewController.h; sourceTree = "<group>"; };
 		440F1A431DC49111006E2799 /* NBWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBWebViewController.m; sourceTree = "<group>"; };
+		444CB54F1E777D630041A6F2 /* NBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBViewController.h; sourceTree = "<group>"; };
+		444CB5501E777D630041A6F2 /* NBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBViewController.m; sourceTree = "<group>"; };
+		444CB5531E77D2D50041A6F2 /* AppDelegate+NBRouterUrlsConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AppDelegate+NBRouterUrlsConfig.h"; path = "Appdelegate/AppDelegate+NBRouterUrlsConfig.h"; sourceTree = "<group>"; };
+		444CB5541E77D2D50041A6F2 /* AppDelegate+NBRouterUrlsConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AppDelegate+NBRouterUrlsConfig.m"; path = "Appdelegate/AppDelegate+NBRouterUrlsConfig.m"; sourceTree = "<group>"; };
 		4453E2841DB5FFC400D25CAB /* NBRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NBRouter.h; path = NBRouter/NBRouter.h; sourceTree = "<group>"; };
 		445569431E1DE7D90041B2CB /* NBURLRouteMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBURLRouteMaker.h; path = NBRouter/NBURLRouteMaker.h; sourceTree = "<group>"; };
 		445569441E1DE7D90041B2CB /* NBURLRouteMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBURLRouteMaker.m; path = NBRouter/NBURLRouteMaker.m; sourceTree = "<group>"; };
@@ -66,6 +73,8 @@
 		44C6CCCA1DB5D4A8009EA8FB /* NBURLNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBURLNavigation.m; path = NBRouter/NBURLNavigation.m; sourceTree = "<group>"; };
 		44C6CCCC1DB5D4DE009EA8FB /* UIViewController+NBURLRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+NBURLRouter.h"; path = "NBRouter/UIViewController+NBURLRouter.h"; sourceTree = "<group>"; };
 		44C6CCCD1DB5D4DE009EA8FB /* UIViewController+NBURLRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+NBURLRouter.m"; path = "NBRouter/UIViewController+NBURLRouter.m"; sourceTree = "<group>"; };
+		44DC11541E70FF9800A03C6D /* NBURLRouteBacker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBURLRouteBacker.h; path = NBRouter/NBURLRouteBacker.h; sourceTree = "<group>"; };
+		44DC11551E70FF9800A03C6D /* NBURLRouteBacker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBURLRouteBacker.m; path = NBRouter/NBURLRouteBacker.m; sourceTree = "<group>"; };
 		44E668471DB3AA6300E9222C /* NBRouter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NBRouter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E6684B1DB3AA6300E9222C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		44E6684D1DB3AA6300E9222C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -114,6 +123,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		444CB5521E77D0AF0041A6F2 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				44E6684D1DB3AA6300E9222C /* AppDelegate.h */,
+				44E6684E1DB3AA6300E9222C /* AppDelegate.m */,
+				444CB5531E77D2D50041A6F2 /* AppDelegate+NBRouterUrlsConfig.h */,
+				444CB5541E77D2D50041A6F2 /* AppDelegate+NBRouterUrlsConfig.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
 		44E6683E1DB3AA6200E9222C = {
 			isa = PBXGroup;
 			children = (
@@ -137,15 +157,16 @@
 		44E668491DB3AA6300E9222C /* NBRouter */ = {
 			isa = PBXGroup;
 			children = (
+				444CB5521E77D0AF0041A6F2 /* AppDelegate */,
 				44E79E591DB601EC0035BF5D /* Res */,
 				44E6687D1DB3AA7200E9222C /* NBRouter */,
 				446639DD1DB60E0A00161C88 /* XibViewController.h */,
 				446639DE1DB60E0A00161C88 /* XibViewController.m */,
 				446639E51DB614C000161C88 /* XibViewController.xib */,
+				444CB54F1E777D630041A6F2 /* NBViewController.h */,
+				444CB5501E777D630041A6F2 /* NBViewController.m */,
 				440F1A421DC49111006E2799 /* NBWebViewController.h */,
 				440F1A431DC49111006E2799 /* NBWebViewController.m */,
-				44E6684D1DB3AA6300E9222C /* AppDelegate.h */,
-				44E6684E1DB3AA6300E9222C /* AppDelegate.m */,
 				44E668501DB3AA6300E9222C /* PushSecondViewController.h */,
 				44E668511DB3AA6300E9222C /* PushSecondViewController.m */,
 				44E79E5C1DB602C10035BF5D /* PushHomeViewController.h */,
@@ -204,6 +225,8 @@
 				44C6CCCD1DB5D4DE009EA8FB /* UIViewController+NBURLRouter.m */,
 				445569431E1DE7D90041B2CB /* NBURLRouteMaker.h */,
 				445569441E1DE7D90041B2CB /* NBURLRouteMaker.m */,
+				44DC11541E70FF9800A03C6D /* NBURLRouteBacker.h */,
+				44DC11551E70FF9800A03C6D /* NBURLRouteBacker.m */,
 			);
 			name = NBRouter;
 			sourceTree = "<group>";
@@ -278,7 +301,7 @@
 		44E6683F1DB3AA6200E9222C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = BaiZhiqiang;
 				TargetAttributes = {
 					44E668461DB3AA6300E9222C = {
@@ -355,6 +378,7 @@
 				446639E41DB610D400161C88 /* ModalHomeViewController.m in Sources */,
 				44C6CCCE1DB5D4DE009EA8FB /* UIViewController+NBURLRouter.m in Sources */,
 				445569451E1DE7D90041B2CB /* NBURLRouteMaker.m in Sources */,
+				44DC11561E70FF9800A03C6D /* NBURLRouteBacker.m in Sources */,
 				440057381DB65FCE00A1857A /* ModalChildViewController.m in Sources */,
 				44E668821DB3AC5400E9222C /* NBURLRouter.m in Sources */,
 				44E668521DB3AA6300E9222C /* PushSecondViewController.m in Sources */,
@@ -363,7 +387,9 @@
 				440057351DB65FA900A1857A /* StoryboardViewController.m in Sources */,
 				44E6684C1DB3AA6300E9222C /* main.m in Sources */,
 				44C6CCCB1DB5D4A8009EA8FB /* NBURLNavigation.m in Sources */,
+				444CB5511E777D630041A6F2 /* NBViewController.m in Sources */,
 				44E79E5E1DB602C10035BF5D /* PushHomeViewController.m in Sources */,
+				444CB5551E77D2D50041A6F2 /* AppDelegate+NBRouterUrlsConfig.m in Sources */,
 				446639E01DB60E0A00161C88 /* XibViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,6 +463,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -484,6 +511,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

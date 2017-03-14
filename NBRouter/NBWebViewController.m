@@ -30,9 +30,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.webView];
-    if (self.params[@"urlStr"]) {
-        [self.webView loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:self.params[@"urlStr"]]]];
-    }
+    printf("self===>>> %s",[[self.originUrl absoluteString] UTF8String]);
+    [self.webView loadRequest:[[NSURLRequest alloc] initWithURL:self.originUrl]];
 }
 
 - (void)didReceiveMemoryWarning {

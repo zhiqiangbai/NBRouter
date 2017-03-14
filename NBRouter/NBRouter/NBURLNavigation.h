@@ -61,22 +61,16 @@ NBSingletonH(NBURLNavigation)
  *
  */
 + (void)popToRootViewControllerAnimated:(BOOL)animated;
-
 /**
- *  modal跳转时,一次倒退两个界面
- *
- */
-+ (void)dismissTwiceViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion;
-/**
- *  modal跳转时,一次性倒退指定个界面
+ *  modal跳转时,一次性倒退指定个控制器
  *
  */
 + (void)dismissViewControllerWithTimes:(NSUInteger)times animated: (BOOL)flag completion: (void (^ __nullable)(void))completion;
 /**
- *  modal跳转时,一次性倒退指定个界面
+ *  modal跳转时,一次性倒退到根控制器
  *
  */
-+ (void)dismissToRootViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion;
++ (void)dismissToRootViewControllerAnimated: (BOOL)animate completion: (void (^ __nullable)(void))completion;
 
 @end
 

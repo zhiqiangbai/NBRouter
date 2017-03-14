@@ -8,6 +8,7 @@
 
 #import "NBSingleton.h"
 #import "UIViewController+NBURLRouter.h"
+#import "NBURLRouteBacker.h"
 
 @class NBURLRouteMaker;
 
@@ -20,256 +21,100 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NBURLRouter : NSObject
 
 
-@property(nonatomic,strong,readonly)NSString *mHttpScheme;          ///< http协议头
-@property(nonatomic,strong,readonly)NSString *mHttpsScheme;         ///< https协议头
-@property(nonatomic,strong,readonly)NSString *mNormalScheme;        ///< 代码创建控制器协议头
-@property(nonatomic,strong,readonly)NSString *mXibScheme;           ///< xib加载控制器协议头
-@property(nonatomic,strong,readonly)NSString *mStoryBoardScheme;    ///< storyboard 加载控制器协议头
+@property(nonatomic,copy,readonly)NSString *mHttpScheme;          ///< http协议头
+@property(nonatomic,copy,readonly)NSString *mHttpsScheme;         ///< https协议头
+//@property(nonatomic,copy,readonly)NSArray *mCustomSchemes;        ///< 自定义协议头
+
 @property(nonatomic,strong,readonly)UIViewController *currentViewController; ///< 当前控制器
 @property(nonatomic,assign)BOOL hideBottomBarWhenPushed;///< 导航栏跳转时,是否隐藏菜单栏
     
 NBSingletonH(NBURLRouter)
 
 /**
- *  如果有从Xib中加载控制器的跳转,就需要设置,加载的xib文件名必须与控制器名相同
+ 设置自定义协议
+
+ @param schemes 自定义协议数组
  */
-+ (void)setSchemeFromXibLoadViewController:(NSString *)scheme;
-/**
- *  如果有从storyboard中加载控制器的跳转,就需要设置, 
- *  此类url按照此种规范书写, eg:fromsb://xxxxx/storyboardName.storyboardId,主要是提供storyboardName 以及 控制器的 storyboardId
- */
-+ (void)setSchemeFromStoryboardLoadViewController:(NSString *)scheme;
-/**
- *  如果有代码直接创建控制器的跳转,就需要设置
- */
-+ (void)setSchemeFromCodeViewController:(NSString *)scheme;
+//+ (void)setCustomSchemes:(NSArray *)schemes;
 
 
 /**
- *  加载plist文件中的URL配置信息
- *
- *  @param plistName plist文件名称,不用加后缀
- *
- *  plist文件格式可参考NBRouter.plist
- *
+ 设置urls数据.
+ 格式:
+    1. 如果是采用http / https 协议的url,目前必须设置为这样, 其中NBWebViewController是指对应要跳转的控制器名称,拼写不能错误
+    @"http" : @"NBWebViewController"
+    @"https" : @"NBWebViewController"
+    2. 如果采用的是自定义协议,比如router://
+    @"router" : {
+        @"router://home" : @"HomeViewController",
+        ...
+    }
+    3. 如果没有采用协议或者说采用了协议都可以使用:
+    @"router://home" : @"HomeViewController",
+    @"router://profile" : @"ProfileViewController",
+    @"setting" : @"SettingViewController"
+ 
+    当然,非常建议使用协议内子集方式.这里后面出现的控制器名称必须与目标控制器名称一一对应.
+ 完整版:
+    {
+        @"http" : @"",
+        @"https" : @"",
+        @"router" : {
+                    @"router://home" : @"HomeViewController",
+                    ...
+                    }
+        @"other" : @"OtherViewController"
+    }
+
+ @param urlsDict 键值对数据
  */
-+ (void)loadConfigDictFromPlist:(NSString *)plistName;
++ (void)setUrlsConfigDict:(NSDictionary *)urlsDict;
 
 /**
- *  设置RootViewController
- *
- *  @param urlString 自定义的URL
- *  @param classType 需要添加的导航控制器 eg.[UINavigationController class]
- */
-+ (void)setRootURLString:(NSString *)urlString withNavigationClass:(Class)classType;
-/**
- *  设置RootViewController
- *
- *  @param urlString 自定义的URL
- */
-+ (void)setRootURLString:(NSString *)urlString;
+ 模态跳转dismiss
 
-    
-#pragma mark --------  push控制器 --------
+ @param backerBlock 回调配置backer参数
+ */
++ (void)dismiss:(void(^ _Nullable)(NBURLRouteDismissBacker * backer))backerBlock;
 
 /**
- *  push控制器
- *
- *  @param viewController 目的控制器
+ 向上退一层
  */
-+ (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated;
++ (void)dismiss;
 
 /**
- *  push控制器
- *
- *  @param viewController   目的控制器
- *  @param handler          回调函数参数
+ 导航栏跳转pop
+
+ @param backerBlock 回调皮遏制backer参数
  */
-+ (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated callBackHandler:(CallBackHandler)handler;
++ (void)pop:( void(^ _Nullable)(NBURLRoutePopBacker * backer))backerBlock;
 
 /**
- *  push控制器
- *
- *  @param urlString 自定义的URL,可以拼接参数
+ 向上退一层
  */
-+ (void)pushURLString:(NSString *)urlString animated:(BOOL)animated;
-
-/**
- *  push控制器
- *
- *  @param urlString 自定义的URL,可以拼接参数
- *  @param handler   回调函数参数
- */
-+ (void)pushURLString:(NSString *)urlString animated:(BOOL)animated callBackHandler:(CallBackHandler)handler;
-
-
-/**
- *  push控制器
- *
- *  @param urlString 自定义URL,也可以拼接参数,但会被下面的query替换掉
- *  @param query     存放参数
- */
-+ (void)pushURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated;
-
-/**
- *  push控制器
- *
- *  @param urlString 自定义URL,也可以拼接参数,但会被下面的query替换掉
- *  @param query     存放参数
- *  @param handler   回调函数参数
- */
-+ (void)pushURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated callBackHandler:(CallBackHandler)handler;
-
-    
-#pragma mark --------  pop控制器 --------
-    
-/** pop掉一层控制器 */
-+ (void)popViewControllerAnimated:(BOOL)animated;
-/** pop掉两层控制器 */
-+ (void)popTwiceViewControllerAnimated:(BOOL)animated;
-/** pop掉times层控制器 */
-+ (void)popViewControllerWithTimes:(NSUInteger)times animated:(BOOL)animated;
-/** pop到根层控制器 */
-+ (void)popToRootViewControllerAnimated:(BOOL)animated;
-/** pop到指定控制器 */
-+ (void)popToViewController:(UIViewController *)viewController animated:(BOOL)animated;
-    
-#pragma mark --------  modal控制器 --------
-    
-/**
- *  modal控制器
- *
- *  @param viewControllerToPresent 目标控制器
- */
-+ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)animated completion:(void (^ __nullable)(void))completion;
-
-/**
- *  modal控制器
- *
- *  @param viewControllerToPresent 目标控制器
- *  @param handler                 回调函数参数
- */
-+ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)animated completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler;
-
-/**
- *  modal控制器
- *
- *  @param viewControllerToPresent 目标控制器
- *  @param classType               需要添加的导航控制器 eg.[UINavigationController class]
- */
-+ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion;
-
-/**
- *  modal控制器
- *
- *  @param viewControllerToPresent 目标控制器
- *  @param classType               需要添加的导航控制器 eg.[UINavigationController class]
- *  @param handler                 回调函数参数
- */
-+ (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler;
-
++ (void)pop;
 
 
 /**
- *  modal控制器
- *
- *  @param urlString 自定义的URL,可以拼接参数
+ 设置根控制器
+
+ @param makerBlock 回调配置maker参数
  */
-+ (void)presentURLString:(NSString *)urlString animated:(BOOL)animated completion:(void (^ __nullable)(void))completion;
++ (void)setRootViewControllerForMaker:(void(^)(NBURLRouteMaker * maker))makerBlock;
 
 /**
- *  modal控制器
- *
- *  @param urlString 自定义的URL,可以拼接参数
- *  @param handler   回调函数参数
- */
-+ (void)presentURLString:(NSString *)urlString animated:(BOOL)animated completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler;
+ 导航栏跳转时使用
 
-    
-/**
- *  modal控制器
- *
- *  @param urlString 自定义URL,也可以拼接参数,但会被下面的query替换掉
- *  @param query     存放参数
+ @param makerBlock 回调配置maker参数
  */
-+ (void)presentURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated completion:(void (^ __nullable)(void))completion;
-
++ (void)push:(void(^)(NBURLRouteMaker * maker))makerBlock;
 
 /**
- *  modal控制器
- *
- *  @param urlString 自定义URL,也可以拼接参数,但会被下面的query替换掉
- *  @param query     存放参数
- *  @param handler   回调函数参数
+ 模态跳转时使用
+
+ @param makerBlock 回调配置maker参数
  */
-+ (void)presentURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler;
-
-
-/**
- *  modal控制器,并且给modal出来的控制器添加一个导航控制器
- *
- *  @param urlString 自定义的URL,可以拼接参数
- *  @param classType 需要添加的导航控制器 eg.[UINavigationController class]
- */
-+ (void)presentURLString:(NSString *)urlString animated:(BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion;
-
-
-/**
- *  modal控制器,并且给modal出来的控制器添加一个导航控制器
- *
- *  @param urlString 自定义的URL,可以拼接参数
- *  @param classType 需要添加的导航控制器 eg.[UINavigationController class]
- *  @param handler   回调函数参数
- */
-+ (void)presentURLString:(NSString *)urlString animated:(BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler;
-
-    
-/**
- *  modal控制器,并且给modal出来的控制器添加一个导航控制器
- *
- *  @param urlString 自定义URL,也可以拼接参数,但会被下面的query替换掉
- *  @param query     存放参数
- *  @param classType 需要添加的导航控制器 eg.[UINavigationController class]
- */
-+ (void)presentURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion;
-
-/**
- *  modal控制器,并且给modal出来的控制器添加一个导航控制器
- *
- *  @param urlString 自定义URL,也可以拼接参数,但会被下面的query替换掉
- *  @param query     存放参数
- *  @param classType 需要添加的导航控制器 eg.[UINavigationController class]
- *  @param handler   回调函数参数
- */
-+ (void)presentURLString:(NSString *)urlString query:(NSDictionary *)query animated:(BOOL)animated withNavigationClass:(Class)classType completion:(void (^ __nullable)(void))completion callBackHandler:(CallBackHandler)handler;
-
-#pragma mark --------  dismiss控制器 --------
-    /** dismiss掉1层控制器 */
-+ (void)dismissViewControllerAnimated: (BOOL)animated completion: (void (^ __nullable)(void))completion;
-    /** dismiss掉2层控制器 */
-+ (void)dismissTwiceViewControllerAnimated: (BOOL)animated completion: (void (^ __nullable)(void))completion;
-    /** dismiss掉times层控制器 */
-+ (void)dismissViewControllerWithTimes:(NSUInteger)times animated: (BOOL)animated completion: (void (^ __nullable)(void))completion;
-    /** dismiss到根层控制器 */
-+ (void)dismissToRootViewControllerAnimated: (BOOL)animated completion: (void (^ __nullable)(void))completion;
-
-
-/**
- 传入maker对象,进行跳转到指定控制器,
- 使用这个方法,是不需要设置多个加载控制器的协议头,直接在maker中设置即可,
- 当前可直接使用:maker.*.*.push()进行跳转切换,后期再改进
-
- @param maker 配置
- */
-+ (void)IntentToMaker:(NBURLRouteMaker *)maker;
-
-/**
- 在block中设置maker,
- 使用这个方法,是不需要设置多个加载控制器的协议头,直接在maker中设置即可
-
- @param block 回调,设置maker配置参数
- */
-+ (void)IntentTo:(void(^)(NBURLRouteMaker *))block;
++ (void)present:(void(^)(NBURLRouteMaker * maker))makerBlock;
 
 NS_ASSUME_NONNULL_END
 

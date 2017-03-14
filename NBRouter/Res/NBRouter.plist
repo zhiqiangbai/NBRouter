@@ -6,24 +6,18 @@
 	<string>NBWebViewController</string>
 	<key>https</key>
 	<string>NBWebViewController</string>
-	<key>bzqnormal</key>
+	<key>nbrouter</key>
 	<dict>
-		<key>bzqnormal://nbrouter/modalchildviewcontroller</key>
+		<key>nbrouter://storyboard</key>
+		<string>StoryboardViewController</string>
+		<key>nbrouter://home</key>
+		<string>UITabbarController</string>
+		<key>nbrouter://modalchild</key>
 		<string>ModalChildViewController</string>
-		<key>bzqnormal://nbrouter/pushsecondviewcontroller</key>
+		<key>nbrouter://pushsecond</key>
 		<string>PushSecondViewController</string>
 	</dict>
-	<key>bzqxib</key>
-	<dict>
-		<key>bzqxib://nbrouter/xibviewcontroller</key>
-		<string>XibViewController</string>
-	</dict>
-	<key>bzqsb</key>
-	<dict>
-		<key>bzqsb://nbrouter/Main.HomeTab</key>
-		<string>UITabbarController</string>
-		<key>bzqsb://nbrouter/Main.StoryboardViewController</key>
-		<string>StoryboardViewController</string>
-	</dict>
+	<key>xibviewcontroller</key>
+	<string>XibViewController</string>
 </dict>
 </plist>

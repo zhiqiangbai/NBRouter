@@ -26,11 +26,13 @@ typedef void(^ __nullable CallBackHandler)(id parmas);
 @property (nonatomic,strong) NSDictionary    *params;///< 跳转后控制器能拿到的参数
 @property (nonatomic,weak  ) CallBackHandler callBackHandler;///< 返回上一个控制器时,如果有需要传递的参数,可以通过这个回传
 
-// 根据参数创建控制器
-+ (UIViewController *)initFromString:(NSString *)urlString fromConfig:(NSDictionary *)configDict;
-// 根据参数创建控制器
-+ (UIViewController *)initFromString:(NSString *)urlString withQuery:(NSDictionary *)query fromConfig:(NSDictionary *)configDict;
+/**
+ 根据maker和协议链接字典生成对应的控制器
 
+ @param maker maker对象
+ @param configDict 链接数据字典
+ @return 目标控制器对象
+ */
 + (UIViewController *)initFromMaker:(NBURLRouteMaker *)maker fromConfig:(NSDictionary *)configDict;
 @end
 NS_ASSUME_NONNULL_END

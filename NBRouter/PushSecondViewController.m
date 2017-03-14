@@ -8,9 +8,12 @@
 
 #import "PushSecondViewController.h"
 
-#import "NBURLRouter.h"
+#import "NBRouter.h"
 
 @interface PushSecondViewController ()
+
+@property(nonatomic,assign)NSInteger index;
+
 
 @end
 
@@ -25,8 +28,9 @@
     label.numberOfLines = 0;
     [self.view addSubview:label];
     
-    
-    label.text = [NSString stringWithFormat:@"点击屏幕,回到上一页\n\n 传递参数为:\nuserName = %@, pwd = %@",self.params[@"userName"],self.params[@"pwd"]];
+    self.index = [self.params[@"index"] integerValue];
+
+    label.text = [NSString stringWithFormat:@"点击屏幕,前往下一页\n\n 传递参数为:\nuserName = %@, pwd = %@ \n 第 %ld 页",self.params[@"userName"],self.params[@"pwd"],self.index];
     
 }
 
@@ -47,7 +51,12 @@
 
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self pop];
+    // 采用对象传参, 当然默认是隐藏了底部控制栏的,如果不想隐藏,设为NO即可
+    [NBURLRouter push:^(NBURLRouteMaker * _Nonnull maker) {
+        maker.intentUrlStr(@"nbrouter://pushsecond").parmas(@{@"userName":@"张三",
+                                                                                                         @"pwd":@"123456",
+                                                                                                         @"index":@(self.index+1)}).animate(YES);
+    }];
 }
 
 
@@ -55,7 +64,19 @@
     if (self.callBackHandler) {
         self.callBackHandler(@{@"userName":@"李四",@"pwd":@"qwertasdf"});
     }
-    [NBURLRouter popViewControllerAnimated:YES];
+    [NBURLRouter pop:^(NBURLRoutePopBacker * backer) {
+        if (self.index % 4 == 0) {
+            // 回退到根界面
+            backer.toRoot();
+        }else if(self.index %3 == 0){
+            backer.viewController(@"PushSecondViewController");
+        }else{
+            // 这里是测试回退到某个界面
+            NSUInteger times = arc4random()%self.index;
+            backer.times( times == 0 ? 1 : times);
+        }
+
+    }];
 }
 
 @end

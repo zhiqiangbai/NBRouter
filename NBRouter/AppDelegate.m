@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "NBURLRouter.h"
+#import "NBRouter.h"
+#import "AppDelegate+NBRouterUrlsConfig.h"
 
 @interface AppDelegate ()
 
@@ -17,14 +18,14 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    [NBURLRouter setSchemeFromCodeViewController:@"bzqnormal"];
-    [NBURLRouter setSchemeFromXibLoadViewController:@"bzqxib"];
-    [NBURLRouter setSchemeFromStoryboardLoadViewController:@"bzqsb"];
+    //配置urls
+    [self setupRouter];
+    [NBURLRouter setRootViewControllerForMaker:^(NBURLRouteMaker * maker) {
+        maker.intentUrlStr(@"nbrouter://home").storyboardName(@"Main").identifier(@"HomeTab");
+        
+    }];
 
-    [NBURLRouter loadConfigDictFromPlist:@"NBRouter.plist"];
     
-    [NBURLRouter setRootURLString:@"bzqsb://nbrouter/Main.HomeTab"];
     return YES;
 }
 

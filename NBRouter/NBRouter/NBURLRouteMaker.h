@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, IntentType) {
-    IntentTypeNull,///< 没有设置跳转
-    IntentTypePush,///< 导航栏跳转
-    IntentTypePresent,///< 模态跳转
+struct NBURLRouteMakerStatus {
+    // 提示信息
+    __unsafe_unretained NSString * statusMsg;
+    // 是否存在错误
+    BOOL isError;
 };
+
+@class NBURLRouteMaker;
 
 typedef NS_ENUM(NSUInteger, LoadViewControllerType) {
     LoadViewControllerTypeCode,///< 纯代码加载
@@ -21,11 +24,9 @@ typedef NS_ENUM(NSUInteger, LoadViewControllerType) {
 };
 
 
-
 typedef void(^BackHandler)(id parmas);
 typedef void(^Completion)();
 
-@class NBURLRouteMaker;
 
 typedef NBURLRouteMaker *(^LoadStoryboardName)(NSString *storyboardName);
 typedef NBURLRouteMaker *(^LoadXibName)(NSString *xibName);
@@ -39,10 +40,11 @@ typedef NBURLRouteMaker *(^Handler)(BackHandler handler);
 typedef NBURLRouteMaker *(^CompletionHandler)(Completion completion);
 typedef NBURLRouteMaker *(^Animate)(BOOL animate);
 typedef NBURLRouteMaker *(^HidesBottomBarWhenPushed)(BOOL hidesBottomBarWhenPushed);
-typedef void (^Push)();
-typedef void (^Present)();
 
 
+/**
+ 界面"前进时"配置管理
+ */
 @interface NBURLRouteMaker : NSObject
 
 @property(nonatomic,copy,readonly)LoadStoryboardName storyboardName;///< storyboard name
@@ -57,8 +59,6 @@ typedef void (^Present)();
 @property(nonatomic,copy,readonly)Parmas parmas;///< 跳转时携带参数
 @property(nonatomic,copy,readonly)Handler handler;///< 回调(页面返回时调用传参数)
 @property(nonatomic,copy,readonly)CompletionHandler completion;///< 模态跳转时回调
-@property(nonatomic,copy,readonly)Push push;///< 导航栏跳转
-@property(nonatomic,copy,readonly)Present present;///< 模态跳转
 
 
 @property(nonatomic,copy,readonly)NSString * m_storyboard;///< storyboard name
@@ -73,7 +73,8 @@ typedef void (^Present)();
 @property(nonatomic,copy,readonly)Completion m_completion;///< 模态跳转时回调
 @property(nonatomic,copy,readonly)Class m_navigationClass;///< 跳转后设置的导航栏类
 @property(nonatomic,copy,readonly)UIViewController *m_viewController;
-@property(nonatomic,assign,readonly)IntentType m_intentType;
 @property(nonatomic,assign,readonly)LoadViewControllerType m_loadViewControllerType;
+@property(nonatomic,assign,readonly)struct NBURLRouteMakerStatus status;/// < 配置状态
+
 
 @end

@@ -32,7 +32,7 @@ NBSingletonM(NBURLNavigation)
         return viewController.navigationController;
     }
     
-    NSAssert(0, @"当前控制器不是导航栏控制器");
+    NSAssert(0, @"你可能遇到了一个假的导航栏控制器");
     return nil;
 }
 
@@ -43,13 +43,13 @@ NBSingletonM(NBURLNavigation)
 + (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     if (!viewController) {
-        NSAssert(0, @"请添加与url相匹配的控制器到plist文件中,或者协议头可能写错了!");
+        NSAssert(0, @"你可能写了一个假的跳转链接,导致我们没有找到目标控制器");
     }else {
         UINavigationController *navigationController = [NBURLNavigation sharedNBURLNavigation].currentNavigationViewController;
         if (navigationController) {
             [navigationController pushViewController:viewController animated:animated];
         }else{
-            NSAssert(0, @"当前控制器非导航栏控制器,无法进行push操作");
+            NSAssert(0, @"你可能遇到了一个假的导航栏控制器,无法进行push操作");
         }
     }
 }
@@ -57,14 +57,14 @@ NBSingletonM(NBURLNavigation)
 + (void)presentViewController:(UIViewController *)viewController animated: (BOOL)flag completion:(void (^ __nullable)(void))completion
 {
     if (!viewController) {
-        NSAssert(0, @"请添加与url相匹配的控制器到plist文件中,或者协议头可能写错了!");
+        NSAssert(0, @"你可能写了一个假的跳转链接,导致我们没有找到目标控制器");
     }else {
         UIViewController *currentViewController = [[NBURLNavigation sharedNBURLNavigation] currentViewController];
         if (currentViewController) {
             // 当前控制器存在
             [currentViewController presentViewController:viewController animated:flag completion:completion];
         } else {
-            NSAssert(0, @"没有找到根控制器,无法进行modal跳转操作");
+            NSAssert(0, @"你可能在进行一个假的模态跳转操作,因为我们没有找到根控制器");
         }
     }
 }
@@ -126,8 +126,8 @@ NBSingletonM(NBURLNavigation)
             if (count > times){
                 [currentViewController popToViewController:[currentViewController.viewControllers objectAtIndex:count-1-times] animated:animated];
             }else {
-                // 如果times大于控制器的数量
-                NSAssert(0, @"确定可以pop掉那么多控制器?");
+                // 如果times大于控制器的数量, 那么就直接后退到根控制器主页
+                [currentViewController popToRootViewControllerAnimated:animated];
             }
         }
     }
@@ -136,37 +136,27 @@ NBSingletonM(NBURLNavigation)
     [[NBURLNavigation sharedNBURLNavigation].currentNavigationViewController popToRootViewControllerAnimated:animated];
 }
 
-
-+ (void)dismissTwiceViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion {
-    [self dismissViewControllerWithTimes:2 animated:YES completion:completion];
-}
-
-
 + (void)dismissViewControllerWithTimes:(NSUInteger)times animated: (BOOL)flag completion: (void (^ __nullable)(void))completion {
     UIViewController *rootVC = [[NBURLNavigation sharedNBURLNavigation] currentViewController];
     
     if (rootVC) {
-        while (times > 0) {
+        // 如果dismiss 次数超过根控制器所在层,那么就直接退到根控制器层,不再向前处理
+        while (times > 0 && rootVC.presentingViewController) {
             rootVC = rootVC.presentingViewController;
             times -= 1;
         }
         [rootVC dismissViewControllerAnimated:YES completion:completion];
     }
-    
-    if (!rootVC.presentedViewController) {
-        NSAssert(0, @"确定能dismiss掉这么多控制器?");
-    }
-    
 }
 
 
-+ (void)dismissToRootViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion {
++ (void)dismissToRootViewControllerAnimated: (BOOL)animate completion: (void (^ __nullable)(void))completion {
     UIViewController *currentViewController = [[NBURLNavigation sharedNBURLNavigation] currentViewController];
     UIViewController *rootVC = currentViewController;
     while (rootVC.presentingViewController) {
         rootVC = rootVC.presentingViewController;
-        [rootVC dismissViewControllerAnimated:YES completion:completion];
     }
+    [rootVC dismissViewControllerAnimated:animate completion:completion];
 }
 
 @end

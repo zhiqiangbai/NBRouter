@@ -22,9 +22,10 @@
 @property(nonatomic,copy,readwrite)BackHandler m_handler;///< 跳转url
 @property(nonatomic,copy,readwrite)Class m_navigationClass;///< 跳转后设置的导航栏类
 @property(nonatomic,copy,readwrite)UIViewController *m_viewController;
-@property(nonatomic,assign,readwrite)IntentType m_intentType;
 @property(nonatomic,assign,readwrite)LoadViewControllerType m_loadViewControllerType;
 @property(nonatomic,copy,readwrite)Completion m_completion;///< 模态跳转时回调
+@property(nonatomic,assign,readwrite)struct NBURLRouteMakerStatus status;/// < 配置状态
+
 
 @end
 
@@ -38,8 +39,6 @@
 @synthesize animate = _animate;
 @synthesize handler = _handler;
 @synthesize parmas = _parmas;
-@synthesize push= _push;
-@synthesize present = _present;
 @synthesize navigationClass = _navigationClass;
 @synthesize viewController = _viewController;
 @synthesize completion = _completion;
@@ -47,7 +46,6 @@
 - (instancetype)init{
     if (self = [super init]) {
         self.m_hideBottomBarWhenPush = YES;
-        self.m_intentType = IntentTypeNull;
         self.m_loadViewControllerType = LoadViewControllerTypeCode;
         self.m_bundle = [NSBundle mainBundle];
     }
@@ -187,53 +185,27 @@
     return _viewController;
 }
 
-- (Push)push{
-    if (!_push) {
-        __weak typeof(self) weakSelf = self;
-        _push = ^(){
-            weakSelf.m_intentType = IntentTypePush;
-            [weakSelf intent];
-        };
-    }
-    return _push;
-}
-
-- (Present)present{
-    if (!_present) {
-        __weak typeof(self) weakSelf = self;
-        _present = ^(){
-            weakSelf.m_intentType = IntentTypePresent;
-            [weakSelf intent];
-        };
-
-    }
-    return _present;
-}
-
-- (void)intent{
-    if (self.m_viewController) {
-        //说明直接跳转到控制器
-        self.m_viewController.params = self.m_parmas;
-        self.m_viewController.callBackHandler = self.m_handler;
-    }else{
+- (struct NBURLRouteMakerStatus)status{
+    if (!_status.statusMsg) {
+        _status = (struct NBURLRouteMakerStatus){@"",NO};
         if ([self emptyStr:_m_urlStr]) {
-            NSAssert(0, @"请设置跳转URL");
+            return _status =  (struct NBURLRouteMakerStatus){@"NBURLRouteMaker:跳转URL不应该是空的!,eg: maker.intentUrlStr(@\"router://config\")",YES};
         }
         //如果是从storyboard中加载
         if(self.m_loadViewControllerType == LoadViewControllerTypeStoryboard) {
             if ([self emptyStr:_m_storyboard]) {
-                NSAssert(0, @"请设置正确的storyboard");
+                return _status = (struct NBURLRouteMakerStatus){@"NBURLRouteMaker:storyboardName不应该是空的!,eg: maker.storyboardName(@\"storyboard\")",YES};
             }
             if ([self emptyStr:_m_identifier]) {
-                NSAssert(0, @"请设置正确的identifier");
+                return _status = (struct NBURLRouteMakerStatus){@"NBURLRouteMaker:identifier不应该是空的!,eg: maker.identifier(@\"identifier\")",YES};
             }
         }else if(self.m_loadViewControllerType == LoadViewControllerTypeXib){
             if ([self emptyStr:_m_xib]) {
-                NSAssert(0, @"请设置正确的xibName");
+                return _status = (struct NBURLRouteMakerStatus){@"NBURLRouteMaker:xibName不应该是空的!,eg: maker.xibName(@\"xibname\")",YES};
             }
         }
     }
-    [NBURLRouter IntentToMaker:self];
+    return _status;
 }
 
 - (BOOL)emptyStr:(NSString *)str{
