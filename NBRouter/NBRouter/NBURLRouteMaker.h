@@ -51,7 +51,7 @@ typedef NBURLRouteMaker *(^HidesBottomBarWhenPushed)(BOOL hidesBottomBarWhenPush
 @property(nonatomic,copy,readonly)LoadXibName xibName;///< xib name
 @property(nonatomic,copy,readonly)LoadIdentifier identifier;///< identifier
 @property(nonatomic,copy,readonly)FromBundle bundle;///< bundle , 默认为:[NSBundle mainBundle]
-@property(nonatomic,copy,readonly)HidesBottomBarWhenPushed hidesBottomBarWhenPushed;///< push时是否隐藏底部栏,默认不隐藏
+@property(nonatomic,copy,readonly)HidesBottomBarWhenPushed hidesBottomBarWhenPushed;///< push时是否隐藏底部栏,默认隐藏
 @property(nonatomic,copy,readonly)IntentUrl intentUrlStr;///< 跳转url
 @property(nonatomic,copy,readonly)Animate animate;///< 动画
 @property(nonatomic,copy,readonly)NavigationClass navigationClass;///< 自定义导航栏Class
