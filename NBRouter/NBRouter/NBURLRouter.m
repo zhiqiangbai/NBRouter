@@ -107,7 +107,9 @@ NBSingletonM(NBURLRouter)
 
 + (void)pop:(void (^  _Nullable)(NBURLRoutePopBacker * _Nonnull backer))backerBlock{
     NBURLRoutePopBacker *backer = [NBURLRoutePopBacker new];
-    backerBlock(backer);
+    if (backerBlock) {
+        backerBlock(backer);
+    }
     // 如果设置了root,那么以root为准,如果没设置,就以times为准
     if (backer.m_isToRoot) {
         [NBURLNavigation popToRootViewControllerAnimated:backer.m_animate];
@@ -136,7 +138,9 @@ NBSingletonM(NBURLRouter)
 
 + (void)dismiss:(void (^  _Nullable)(NBURLRouteDismissBacker * _Nonnull backer))backerBlock{
     NBURLRouteDismissBacker *backer = [NBURLRouteDismissBacker new];
-    backerBlock(backer);
+    if (backerBlock) {
+        backerBlock(backer);
+    }
     // 如果设置了root,那么以root为准,如果没设置,就以times为准
     if (backer.m_isToRoot) {
         [NBURLNavigation dismissToRootViewControllerAnimated:backer.m_animate completion:backer.m_completion];
