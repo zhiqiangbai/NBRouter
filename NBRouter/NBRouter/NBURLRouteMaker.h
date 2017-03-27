@@ -72,7 +72,7 @@ typedef NBURLRouteMaker *(^HidesBottomBarWhenPushed)(BOOL hidesBottomBarWhenPush
 @property(nonatomic,copy,readonly)BackHandler m_handler;///< 回调(页面返回时调用传参数)
 @property(nonatomic,copy,readonly)Completion m_completion;///< 模态跳转时回调
 @property(nonatomic,copy,readonly)Class m_navigationClass;///< 跳转后设置的导航栏类
-@property(nonatomic,copy,readonly)UIViewController *m_viewController;
+@property(nonatomic,strong,readonly)UIViewController *m_viewController;
 @property(nonatomic,assign,readonly)LoadViewControllerType m_loadViewControllerType;
 @property(nonatomic,assign,readonly)struct NBURLRouteMakerStatus status;/// < 配置状态
 

@@ -21,7 +21,7 @@
 @property(nonatomic,copy,readwrite)NSDictionary * m_parmas;///< 跳转参数
 @property(nonatomic,copy,readwrite)BackHandler m_handler;///< 跳转url
 @property(nonatomic,copy,readwrite)Class m_navigationClass;///< 跳转后设置的导航栏类
-@property(nonatomic,copy,readwrite)UIViewController *m_viewController;
+@property(nonatomic,strong,readwrite)UIViewController *m_viewController;
 @property(nonatomic,assign,readwrite)LoadViewControllerType m_loadViewControllerType;
 @property(nonatomic,copy,readwrite)Completion m_completion;///< 模态跳转时回调
 @property(nonatomic,assign,readwrite)struct NBURLRouteMakerStatus status;/// < 配置状态

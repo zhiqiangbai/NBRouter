@@ -21,7 +21,7 @@ typedef void(^ __nullable CallBackHandler)(id parmas);
 @interface UIViewController (NBURLRouter)
 
 
-@property (nonatomic,strong) NSURL           *originUrl;///< 跳转后控制器能拿到的url
+@property (nonatomic,copy) NSURL           *originUrl;///< 跳转后控制器能拿到的url
 @property (nonatomic,copy  ) NSString        *path;///< url路径
 @property (nonatomic,strong) NSDictionary    *params;///< 跳转后控制器能拿到的参数
 @property (nonatomic,weak  ) CallBackHandler callBackHandler;///< 返回上一个控制器时,如果有需要传递的参数,可以通过这个回传
