@@ -58,7 +58,7 @@
     [NBURLRouter pop:^(NBURLRoutePopBacker * _Nonnull backer) {
         backer.times(2);
     }];
-    // 退到指定控制器界面(最近的一个)
+    // 退到指定控制器界面(离根控制器最近的一个)
     [NBURLRouter pop:^(NBURLRoutePopBacker * _Nonnull backer) {
         backer.viewController(@"UIViewController");
     }];

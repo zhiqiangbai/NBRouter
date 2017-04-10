@@ -114,13 +114,24 @@ NBSingletonM(NBURLRouter)
     if (backer.m_isToRoot) {
         [NBURLNavigation popToRootViewControllerAnimated:backer.m_animate];
     }else{
-        if (backer.m_toViewControllerName && [NSClassFromString(backer.m_toViewControllerName) isKindOfClass:[UIViewController class]]) {
-            Class class = NSClassFromString(backer.m_toViewControllerName);
-            if ( [class isKindOfClass:[UIViewController class]]) {
-                //说明是跳转到指定控制器
-                [NBURLNavigation popToViewController:(UIViewController *)class animated:backer.m_animate];
-            }else{
-                NSAssert(0, @"请正确设置目标控制器 %@ 不是UIViewController的子类",backer.m_toViewControllerName);
+        if (backer.m_toViewControllerName) {
+            
+            UINavigationController *navigationController = [NBURLNavigation sharedNBURLNavigation].currentNavigationViewController;
+            
+            if (navigationController) {
+                UIViewController *viewController;
+                for (UIViewController *controller in navigationController.viewControllers) {
+                    if ([backer.m_toViewControllerName isEqualToString:NSStringFromClass([controller class])]) {
+                        viewController = controller;
+                        break;
+                    }
+                }
+                
+                if (viewController) {
+                    [NBURLNavigation popToViewController:viewController animated:backer.m_animate];
+                }else{
+                    NSAssert(0, @" %@ 不是UIViewController的子类 或 名称不正确",backer.m_toViewControllerName);
+                }
             }
         }else{
             if (backer.m_times<=0) {

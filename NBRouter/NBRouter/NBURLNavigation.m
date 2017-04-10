@@ -10,7 +10,7 @@
 
 @interface NBURLNavigation()
 
-@property(nonatomic,strong)UINavigationController *currentNavigationViewController;
+@property(nonatomic,strong,readwrite)UINavigationController *currentNavigationViewController;
 @property(nonatomic,strong,readwrite)UIViewController *currentViewController;
 
 

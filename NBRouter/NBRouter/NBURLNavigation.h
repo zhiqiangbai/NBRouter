@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NBURLNavigation : NSObject
 
 @property(nonatomic,strong,readonly)UIViewController *currentViewController;
+@property(nonatomic,strong,readonly)UINavigationController *currentNavigationViewController;
 
 NBSingletonH(NBURLNavigation)
 /**

@@ -45,7 +45,6 @@ typedef NBURLRouteDismissBacker *(^BackerCompletionHandler)(BackerCompletion com
 @interface NBURLRouteDismissBacker : NBURLRouteBacker
 
 @property(nonatomic,copy,readonly)BackerCompletionHandler completion;///< dismiss时回调
-
 @property(nonatomic,copy,readonly)BackerCompletion m_completion;///< dismiss时支持回调
 
 @end
@@ -57,7 +56,7 @@ typedef NBURLRoutePopBacker *(^ToViewController)(NSString *viewControllerName);
 /**
  POP的时候,优先权为: toRoot > viewController > times
  也就是说,如果设置了toRoot,那么就直接回到根控制器
- 如果没有设置turoot,但设置了viewController,那么就退到最近的这个控制器
+ 如果没有设置toRoot,但设置了viewController,那么就退到里根控制器最近的这个控制器
  如果只设置了times,那么就以times为准
  */
 @interface NBURLRoutePopBacker : NBURLRouteBacker

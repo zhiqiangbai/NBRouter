@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "NBRouter"
-  s.version      = "1.3.1.2"
+  s.version      = "1.3.1.3"
   s.summary      = "提供控制器切换管理,完全解耦,随时随地,实现切换控制器"
 
 
@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
   s.author       = { "NapoleonBai" => "napoleonbaiandroid@gmail.com" }
 
 
-  s.source       = { :git => "https://github.com/NapoleonBaiAndroid/NBRouter.git", :tag => "1.3.1.2" }
+  s.source       = { :git => "https://github.com/NapoleonBaiAndroid/NBRouter.git", :tag => "1.3.1.3" }
 
   s.platform     = :ios
   s.platform     = :ios, "7.0"
